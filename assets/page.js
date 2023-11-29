@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	
+	select_menu_item();
+	
 	$('.movie-btn-info').unbind('click').bind('click', function() {
 		var $movie = $(this).closest('.movie-item');
 		id = $movie.attr('id');
@@ -23,6 +25,15 @@ $(document).ready(function() {
 	$('.window').draggable({handle: '.window-titlebar'});
 });
 
+function select_menu_item() {
+	var path_arr = window.location.pathname.split('/');
+	if (path_arr.length > 1 && path_arr[1] != "") {
+		var found_item = $('#top_menu [href="/'+path_arr[1]+'"]');
+		if (found_item.length) {
+			found_item.addClass('menu-item-selected');
+		}
+	}
+}
 
 function get_movie_details(id) {
 	$.post('/movie/details/'+id, function(data, is_success, response_obj) {

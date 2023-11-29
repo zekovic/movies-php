@@ -12,10 +12,10 @@ body, html {
 	height: 100%;
 }
 body {
-	margin: 0px;
+	margin: 50px 0px 0px 0px; /* 50px top menu */
 	padding: 0px;
 	
-	background-color: #ffedcc;
+	background-color: #dbf7ff;
 }
 
 #all_wrap {
@@ -39,16 +39,55 @@ div {
 }
 
 #top_menu {
+	position: fixed;
+	font-size: 0px;
+	top: 0px;
+	left: 0px;
 	cursor: default;
-	padding: 7px 0px;
 	/*
+	padding: 7px 0px;
 	margin: 5px;
 	float: right;
 	*/
 	text-align: right;
 	width: 100%;
-	background-color: #f9c191;
+	background-color: #0269c1;
 	/*border-radius: 5px;*/
+}
+#top_menu * { font-size: 11pt; }
+
+#top_menu > a {
+	display: inline-block;
+	cursor: pointer;
+	padding: 8px 12px;
+	
+	margin: 0px 0px 0px 0px;
+	color: #bfcbef;
+	
+	background: rgb(14,14,112);
+	background: linear-gradient(0deg, rgba(14,14,112,1) 20%, rgba(44,107,218,1) 87%);
+}
+#top_menu > a:HOVER {
+	background: rgb(14,14,54);
+	background: linear-gradient(0deg, rgba(14,14,54,1) 20%, rgba(23,70,154,1) 87%);
+}
+
+#top_menu > a.separator {
+	cursor: default;
+	min-width: 20px;
+}
+
+#top_menu .menu-item-selected {
+	color: #ebeb81;
+}
+
+#top_menu #txt_find {
+	border-radius: 5px;
+	border-width: 0px;
+	height: 24px;
+	padding: 0px 10px;
+	margin: 0px 10px;
+	font-size: 11pt;
 }
 
 a {
@@ -58,15 +97,6 @@ a {
 a:HOVER {
 	text-decoration: underline;
 	color: #333333;
-}
-
-#top_menu > span {
-	cursor: pointer;
-	margin: 2px 15px;
-}
-#top_menu > span.separator {
-	cursor: default;
-	min-width: 20px;
 }
 /*#top_menu > span:HOVER {
 	text-decoration: underline;
@@ -88,12 +118,12 @@ a:HOVER {
 .list-wrap {  }
 
 .movie-item { margin: 0px auto; padding: 15px 20px; width: 60%; max-width: 550px;
-	cursor: default; border-bottom: 1px solid #f5d6b0; }
+	cursor: default; border-bottom: 1px solid #99c1c5; }
 
 
 .movie-btn-info { display: none; margin: 0px 0px 0px 2px; cursor: pointer; width: 18px; height: 18px; background-image: url(/assets/img/icon_info.png);
 	background-repeat: no-repeat; background-size: 18px 18px; vertical-align: bottom; }
-.movie-item:HOVER { background-color: #f5d6b0; }
+.movie-item:HOVER { background-color: #b8e3f7; }
 .movie-item:HOVER .movie-btn-info { display: inline-block; }
 .movie-title { display: block; font-weight: bold; font-size: 12pt; }
 .movie-genres { font-style: italic; font-size: 10pt; }
