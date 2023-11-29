@@ -1,0 +1,114 @@
+* {
+	font-family: Verdana;
+	/*
+	font-size: 11pt;
+	margin: 0px;
+	*/
+	padding: 0px;
+}
+
+body, html {
+	/*overflow: hidden;*/
+	height: 100%;
+}
+body {
+	margin: 0px;
+	padding: 0px;
+	
+	background-color: #ffedcc;
+}
+
+#all_wrap {
+	min-height: 95%;
+	/*margin: 0px auto -35px auto;*/
+	/*margin-bottom: -60px;*/
+	
+}
+.all_wrap:after {
+	content: "";
+	display: block;
+}
+#footer, #all_wrap:after { height: 60px; }
+
+.txt-input {
+	border: 1px solid #555555;
+}
+
+div {
+	/*display: block;*/
+}
+
+#top_menu {
+	cursor: default;
+	padding: 7px 0px;
+	/*
+	margin: 5px;
+	float: right;
+	*/
+	text-align: right;
+	width: 100%;
+	background-color: #f9c191;
+	/*border-radius: 5px;*/
+}
+
+a {
+	text-decoration: none;
+	color: #555555;
+}
+a:HOVER {
+	text-decoration: underline;
+	color: #333333;
+}
+
+#top_menu > span {
+	cursor: pointer;
+	margin: 2px 15px;
+}
+#top_menu > span.separator {
+	cursor: default;
+	min-width: 20px;
+}
+/*#top_menu > span:HOVER {
+	text-decoration: underline;
+}*/
+
+
+#left_menu {
+	padding: 5px;
+	margin: 5px;
+	background-color: #f9c191;
+	float: right;
+	border-radius: 5px;
+}
+
+#left_menu > div {
+	cursor: pointer;
+}
+
+.list-wrap {  }
+
+.movie-item { margin: 0px auto; padding: 15px 20px; width: 60%; max-width: 550px;
+	cursor: default; border-bottom: 1px solid #f5d6b0; }
+
+
+.movie-btn-info { display: none; margin: 0px 0px 0px 2px; cursor: pointer; width: 18px; height: 18px; background-image: url(/assets/img/icon_info.png);
+	background-repeat: no-repeat; background-size: 18px 18px; vertical-align: bottom; }
+.movie-item:HOVER { background-color: #f5d6b0; }
+.movie-item:HOVER .movie-btn-info { display: inline-block; }
+.movie-title { display: block; font-weight: bold; font-size: 12pt; }
+.movie-genres { font-style: italic; font-size: 10pt; }
+.movie-date { font-size: 10pt; float: right; }
+
+.window { position: fixed; background: #ffe3a4; border: 1px solid #555; border-radius: 7px;
+	width: 50%; height: 50%; z-index: 1000; left: 25%; top: 15%; }
+.window * { font-size: 10pt; }
+.window-titlebar { display: block; cursor: move; background: #aaa; height: 24px; overflow: hidden; border-radius: 7px 7px 0px 0px; }
+.window-title { display: inline; cursor: move; vertical-align: sub; font-weight: bold; padding: 0px 10px; }
+.window-btn-close { display: inline; float: right; width: 24px; height: 24px; cursor: pointer; }
+.window-content { display: block; padding: 10px; /*background: #fff;*/ }
+
+
+
+
+
+
