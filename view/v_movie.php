@@ -4,8 +4,8 @@
 <?php 
 print_site();
 
+print_title(Info::$page_title);
 ?>
-<h2><?= Info::$page_title ?></h2>
 <div class=list-wrap>
 <?php
 if (Info::$result) {

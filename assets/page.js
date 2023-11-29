@@ -1,6 +1,9 @@
 $(document).ready(function() {
 	
 	select_menu_item();
+	if ($('#txt_find').val() != '') {
+		expand_find_txt(0);
+	}
 	
 	$('.movie-btn-info').unbind('click').bind('click', function() {
 		var $movie = $(this).closest('.movie-item');
@@ -22,8 +25,49 @@ $(document).ready(function() {
 		$(this).closest('.window').hide();
 	});
 	
+	$('#btn_find').unbind('click').bind('click', function() {
+		find_movies();
+	});
+	$('#txt_find').unbind('keydown').bind('keydown', function(e) {
+		if (e.keyCode == 13) {
+			find_movies();
+		}
+	});
+	$('#txt_find').unbind('focus').bind('focus', function(e) {
+		expand_find_txt();
+	});
+	$('#txt_find').unbind('blur').bind('blur', function(e) {
+		if ($(this).val() == '') {
+			collapse_find_txt();
+		}
+	});
+	
 	$('.window').draggable({handle: '.window-titlebar'});
 });
+
+function expand_find_txt(duration) {
+	if (duration === undefined) {duration = 200};
+	var $txt = $('#txt_find');
+	if ($txt.attr('original_width') === undefined) {
+		$txt.attr('original_width', $txt.width());
+		$txt.css('min-width', $txt.width());
+	}
+	$txt.animate({'width': '35%'}, duration);
+}
+function collapse_find_txt() {
+	setTimeout(function() {
+		$('#txt_find').animate({'width': $('#txt_find').attr('original_width')}, 200);
+	}, 100);
+}
+
+function find_movies() {
+	var find_str = $('#txt_find').val().trim();
+	if (find_str.length < 3) {
+		return;
+	}
+	var new_url = "/movie/find/?filter="+JSON.stringify({title: find_str});
+	location.href = new_url;
+}
 
 function select_menu_item() {
 	var path_arr = window.location.pathname.split('/');

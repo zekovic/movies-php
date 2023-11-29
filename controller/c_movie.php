@@ -49,6 +49,18 @@ class MovieController extends Controller
 		self::show();
 	}
 	
+	public static function find()
+	{
+		$find_title = get_find_filter('title');
+		if (!$find_title || mb_strlen($find_title < 3)) {
+			Info::$result = null;
+			return;
+		}
+		Info::$result = Model\Movie::get_movie_list(null, 0, ['title' => $find_title]);
+		Info::$page_title = "Found movies";
+		self::show();
+	}
+	
 	public static function stats()
 	{
 		self::show('movie_stats');

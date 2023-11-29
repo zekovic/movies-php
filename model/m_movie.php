@@ -42,6 +42,7 @@ class Movie extends SQL_movie
 				//if ($i == 'genre') { $item = trim($item); $where_arr[] = "g.genre_name LIKE '%$item%'"; }
 				if ($i == 'genre') { $item = trim($item); $genre_filter = " HAVING genres LIKE '%$item%'"; }
 				if ($i == 'year') { $item = (int)$item; $where_arr[] = "release_date LIKE '%$item%'"; }
+				if ($i == 'title') { $where_arr[] = "title LIKE '%$item%'"; }
 			}
 		}
 		$where_str = "";
