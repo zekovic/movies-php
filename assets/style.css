@@ -88,6 +88,15 @@ div {
 	padding: 0px 10px;
 	margin: 0px 10px;
 	font-size: 11pt;
+	outline: none;
+}
+#top_menu #btn_find {
+	display: inline-block;
+	background: 0px 0px no-repeat url(/assets/img/Search_Square.svg);
+	width: 24px;
+	height: 24px;
+	margin: 0px 8px -6px -5px;
+	cursor: pointer;
 }
 
 a {
@@ -121,7 +130,7 @@ a:HOVER {
 	cursor: default; border-bottom: 1px solid #99c1c5; }
 
 
-.movie-btn-info { display: none; margin: 0px 0px 0px 2px; cursor: pointer; width: 18px; height: 18px; background-image: url(/assets/img/icon_info.png);
+.movie-btn-info { display: none; margin: 0px 0px 0px 2px; cursor: pointer; width: 18px; height: 18px; background-image: url(/assets/img/Information_Square.svg);
 	background-repeat: no-repeat; background-size: 18px 18px; vertical-align: bottom; }
 .movie-item:HOVER { background-color: #b8e3f7; }
 .movie-item:HOVER .movie-btn-info { display: inline-block; }

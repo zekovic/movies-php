@@ -6,6 +6,7 @@
 	<a><span>Crew</span></a>
 	<a><span>Companies</span></a>
 	<input id=txt_find type="text" placeholder="search"/>
+	<span id=btn_find></span>
 	<a><span>User</span></a>
 	<a><span>Settings</span></a>
 </div>
