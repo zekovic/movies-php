@@ -37,6 +37,9 @@ class Router {
 		// todo Info::$request['method'] = 'GET' , 'POST', ...
 		
 		//echo "<pre>".json_encode(Info::$request , JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)."</pre>";
+		if (isset($_REQUEST['page'])) {
+			Info::$page_number = (int)$_REQUEST['page'];
+		}
 		
 		if (count(Info::$request['path'])) {
 			Info::$controller = Info::$request['path'][0];

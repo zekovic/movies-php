@@ -10,7 +10,7 @@ print_title(Info::$page_title);
 <?php
 if (Info::$result && Info::$result['list']) {
 	foreach (Info::$result['list'] as $i => $item) { 
-		$genres_arr = explode(",", $item['genres']);
+		$genres_arr = $item['genres'] ? explode(",", $item['genres']) : [];
 		$genres_url_arr = [];
 		foreach ($genres_arr as $j => $genre_name) {
 			$genre_name = trim($genre_name);
@@ -23,7 +23,7 @@ if (Info::$result && Info::$result['list']) {
 				<a href="/movie/<?= $item['movie_id'] ?>"><?= $item['title'] ?></a>
 				<span class=movie-btn-info></span>
 			</span>
-			<span class=movie-genres><?= implode(" ", $genres_url_arr) ?></span>
+			<span class=movie-genres><?= implode(" ", $genres_url_arr) ?>&nbsp;</span>
 			<span class=movie-date><a href="/movie/year/<?= $year ?>"><?= $item['release_date'] ?></a></span>
 		</div>
 		

@@ -11,6 +11,14 @@ class MovieController extends Controller
 		Info::$page_title = "Movies (total ".Model\Movie::$items_count." items)";
 		self::show();
 	}
+	public static function page()
+	{
+		$page = Info::$controller_suboption;
+		Info::$result = ['list' => Model\Movie::get_movie_list(null, $page), 'total' => Model\Movie::$items_count];
+		Info::$page_title = "Movies (total ".Model\Movie::$items_count." items)";
+		self::show();
+	}
+	
 	
 	public static function id() {
 		$found = Model\SQL_movie::get(Info::$controller_suboption);

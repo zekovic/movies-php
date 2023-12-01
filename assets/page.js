@@ -43,7 +43,19 @@ $(document).ready(function() {
 	});
 	
 	$('.window').draggable({handle: '.window-titlebar'});
+	
+	set_pagination_links();
+	
 });
+
+function set_pagination_links() {
+	var url_str = location.href + (location.search == '' ? '?' : '&');
+	url_str += 'page=';
+	
+	$('.pagination a').each(function() {
+		$(this).attr('href', url_str + $(this).text());
+	});
+}
 
 function expand_find_txt(duration) {
 	if (duration === undefined) {duration = 200};

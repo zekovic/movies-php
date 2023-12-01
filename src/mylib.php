@@ -26,7 +26,7 @@ function get_find_filter($argument = null) {
 
 function create_pagination($page, $current, $total, $items_per_page) {
 	if ($items_per_page == 0) { $items_per_page = 1; }
-	$url = "/$page/page";
+	$url = "";
 	
 	$page_count = ceil($total / $items_per_page);
 	
@@ -34,31 +34,31 @@ function create_pagination($page, $current, $total, $items_per_page) {
 	
 	if ($page_count <= 7) {
 		for ($i = 1; $i <= $page_count; $i++) {
-			$html .= "<a href='$url/$i'><span>$i</span></a>";
+			$html .= "<a href='{$url}$i'><span>$i</span></a>";
 		}
 	}
 	
 	if ($page_count > 7 && $page_count <= 20) {
 		for ($i = 1; $i <= 3; $i++) {
-			$html .= "<a href='$url/$i'><span>$i</span></a>";
+			$html .= "<a href='{$url}$i'><span>$i</span></a>";
 		}
 		$html .= " . . . ";
 		for ($i = $page_count - 2; $i <= $page_count; $i++) {
-			$html .= "<a href='$url/$i'><span>$i</span></a>";
+			$html .= "<a href='{$url}$i'><span>$i</span></a>";
 		}
 	}
 	
 	if ($page_count > 20) {
 		for ($i = 1; $i <= 3; $i++) {
-			$html .= "<a href='$url/$i'><span>$i</span></a>";
+			$html .= "<a href='{$url}$i'><span>$i</span></a>";
 		}
 		for ($i = 10; $i < $page_count; $i += 20) {
 			$html .= " . . . ";
-			$html .= "<a href='$url/$i'><span>$i</span></a>";
+			$html .= "<a href='{$url}$i'><span>$i</span></a>";
 		}
 		$html .= " . . . ";
 		for ($i = $page_count - 2; $i <= $page_count; $i++) {
-			$html .= "<a href='$url/$i'><span>$i</span></a>";
+			$html .= "<a href='{$url}$i'><span>$i</span></a>";
 		}
 	}
 	
