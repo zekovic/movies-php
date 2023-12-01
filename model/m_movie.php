@@ -4,6 +4,8 @@ namespace Model;
 
 class Movie extends SQL_movie
 {
+	public static $items_count;
+	
 	protected static $options = [
 		'runtime' => ['min' => 10, 'max' => 500, ],
 	];
@@ -57,11 +59,12 @@ class Movie extends SQL_movie
 			$where_str
 			GROUP BY m.movie_id
 			$genre_filter
-			LIMIT $limit OFFSET $start
-			
 		";
+		self::$items_count = CountCache::get_count($SQL);
+		$SQL_limit = "$SQL LIMIT $limit OFFSET $start";
+		
 		//echo $SQL;
-		$result = \DB::query($SQL);
+		$result = \DB::query($SQL_limit);
 		return $result;
 	}
 }

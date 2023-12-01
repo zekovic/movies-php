@@ -7,8 +7,8 @@ class MovieController extends Controller
 	public static function index()
 	{
 		//Info::$result = Model\SQL_movie::load_data(20);
-		Info::$result = Model\Movie::get_movie_list();
-		Info::$page_title = "Movies";
+		Info::$result = ['list' => Model\Movie::get_movie_list(), 'total' => Model\Movie::$items_count];
+		Info::$page_title = "Movies (total ".Model\Movie::$items_count." items)";
 		self::show();
 	}
 	
@@ -29,8 +29,8 @@ class MovieController extends Controller
 		}
 		$genre = urldecode($genre);
 		//self::print("Movies of $genre genre...");
-		Info::$result = Model\Movie::get_movie_list(null, 0, ['genre' => $genre]);
-		Info::$page_title = "Movies of $genre genre";
+		Info::$result = ['list' => Model\Movie::get_movie_list(null, 0, ['genre' => $genre]), 'total' => Model\Movie::$items_count];
+		Info::$page_title = "Movies of $genre genre (total ".Model\Movie::$items_count." items)";
 		self::show();
 		//self::show('movie');
 	}
@@ -44,8 +44,8 @@ class MovieController extends Controller
 		}
 		$year = (int)$year;
 		//self::print("Movies of $year genre...");
-		Info::$result = Model\Movie::get_movie_list(null, 0, ['year' => $year]);
-		Info::$page_title = "Movies from $year";
+		Info::$result = ['list' => Model\Movie::get_movie_list(null, 0, ['year' => $year]), 'total' => Model\Movie::$items_count];
+		Info::$page_title = "Movies from $year (total ".Model\Movie::$items_count." items)";
 		self::show();
 	}
 	
@@ -56,8 +56,8 @@ class MovieController extends Controller
 			Info::$result = null;
 			return;
 		}
-		Info::$result = Model\Movie::get_movie_list(null, 0, ['title' => $find_title]);
-		Info::$page_title = "Found movies";
+		Info::$result = ['list' => Model\Movie::get_movie_list(null, 0, ['title' => $find_title]), 'total' => Model\Movie::$items_count];
+		Info::$page_title = "Found movies (total ".Model\Movie::$items_count." items)";
 		self::show();
 	}
 	

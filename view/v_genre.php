@@ -4,6 +4,7 @@
 <?php 
 //LibHtml::print_header();
 print_site();
+print_title("Genres");
 ?>
 <div>
 <?php

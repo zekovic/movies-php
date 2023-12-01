@@ -169,6 +169,19 @@ a:HOVER {
 
 
 
-
+.pagination {
+	margin: 30px auto 15px auto;
+	text-align: center;
+}
+.pagination a {
+	
+}
+.pagination a:HOVER {
+	background-color: #459ce7;
+}
+.pagination  a > span {
+	margin: 5px;
+	padding: 3px 10px;
+}
 
 

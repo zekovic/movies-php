@@ -8,8 +8,8 @@ print_title(Info::$page_title);
 ?>
 <div class=list-wrap>
 <?php
-if (Info::$result) {
-	foreach (Info::$result as $i => $item) { 
+if (Info::$result && Info::$result['list']) {
+	foreach (Info::$result['list'] as $i => $item) { 
 		$genres_arr = explode(",", $item['genres']);
 		$genres_url_arr = [];
 		foreach ($genres_arr as $j => $genre_name) {
@@ -31,6 +31,9 @@ if (Info::$result) {
 	}
 } ?>
 
+</div>
+<div class=pagination>
+	<?php echo create_pagination("movie", 0, Info::$result['total'], 100); ?>
 </div>
 
 <div>

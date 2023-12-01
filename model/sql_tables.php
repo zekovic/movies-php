@@ -2,6 +2,26 @@
 namespace Model;
 
 /**
+ * @property int $id - int auto_increment 
+ * @property string $query - varchar(63)  
+ * @property int $value - int  
+ * @property timestamp $last_updated - timestamp on update CURRENT_TIMESTAMP 
+*/
+class SQL_count_cache extends Table
+{
+	protected static $columns = [
+		'id' => ['Type' => 'int', 'Null' => false, 'Default' => null, 'Length' => null, 'Unsigned' => false, 'Zerofill' => false, 'Precision' => null, 'Scale' => null, ],
+		'query' => ['Type' => 'string', 'Null' => false, 'Default' => null, 'Length' => 63, 'Unsigned' => false, 'Zerofill' => false, 'Precision' => null, 'Scale' => null, ],
+		'value' => ['Type' => 'int', 'Null' => true, 'Default' => null, 'Length' => null, 'Unsigned' => false, 'Zerofill' => false, 'Precision' => null, 'Scale' => null, ],
+		'last_updated' => ['Type' => 'timestamp', 'Null' => false, 'Default' => null, 'Length' => null, 'Unsigned' => false, 'Zerofill' => false, 'Precision' => null, 'Scale' => null, ],
+	];
+	protected static $db_name = 'count_cache';
+	protected static $primary_key = 'id';
+	protected static $keys = [];
+}
+
+
+/**
  * @property int $country_id - int auto_increment 
  * @property string $country_iso_code - varchar(10)  
  * @property string $country_name - varchar(200)  
