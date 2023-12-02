@@ -5,6 +5,9 @@ require_once __DIR__.'/src/settings.php';
 GlobVars::$root_folder = __DIR__;
 GlobVars::$system_folder = __DIR__."/system";
 
+define('TIMEZONE', 'UTC');
+date_default_timezone_set(TIMEZONE);
+
 require_once GlobVars::$system_folder."/db.class.php";
 
 require_once GlobVars::$system_folder.'/lib.php';
