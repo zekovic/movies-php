@@ -49,11 +49,24 @@ $(document).ready(function() {
 });
 
 function set_pagination_links() {
-	var url_str = location.href + (location.search == '' ? '?' : '&');
-	url_str += 'page=';
+	var args_arr = location.search.split('&');
+	var i = 0, found_str = "";
+	for (i in args_arr) {
+		if (args_arr[i].indexOf("page=") === 0 || args_arr[i].indexOf("?page=") === 0) {
+			found_str = args_arr[i];
+			break;
+		}
+	}
+	var url_str_search = location.search;
+	if (found_str != '') {
+		url_str_search = url_str_search.replace(found_str, '');
+	}
+	var url_str = location.pathname + url_str_search;
+	url_str = url_str + (url_str_search == '' ? '?page=' : '&page=');
+	
 	
 	$('.pagination a').each(function() {
-		$(this).attr('href', url_str + $(this).text());
+		$(this).attr('href', url_str + $(this).attr('number'));
 	});
 }
 

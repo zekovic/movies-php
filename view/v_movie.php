@@ -5,9 +5,12 @@
 print_site();
 
 print_title(Info::$page_title);
+$pagination_html = create_pagination("movie", Info::$page_number, Info::$result['total'], 100);
+echo "<div class=pagination>$pagination_html</div>";
 ?>
 <div class=list-wrap>
 <?php
+
 if (Info::$result && Info::$result['list']) {
 	foreach (Info::$result['list'] as $i => $item) { 
 		$genres_arr = $item['genres'] ? explode(",", $item['genres']) : [];
@@ -16,7 +19,7 @@ if (Info::$result && Info::$result['list']) {
 			$genre_name = trim($genre_name);
 			$genres_url_arr[] = "<a href='/movie/genre/$genre_name'>$genre_name</a>";
 		}
-		$year = substr($item['release_date'], 0, 4);
+		$year = $item['release_date'] ? substr($item['release_date'], 0, 4) : "";
 		?>
 		<div class=movie-item id=<?= $item['movie_id'] ?>>
 			<span class=movie-title>
@@ -33,7 +36,7 @@ if (Info::$result && Info::$result['list']) {
 
 </div>
 <div class=pagination>
-	<?php echo create_pagination("movie", 0, Info::$result['total'], 100); ?>
+	<?php echo $pagination_html; ?>
 </div>
 
 <div>

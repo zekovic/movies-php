@@ -176,8 +176,12 @@ a:HOVER {
 .pagination a {
 	
 }
+.pagination a.current {
+	background-color: #87bce9;
+}
 .pagination a:HOVER {
 	background-color: #459ce7;
+	text-decoration: none;
 }
 .pagination  a > span {
 	margin: 5px;

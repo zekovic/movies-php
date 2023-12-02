@@ -29,38 +29,57 @@ function create_pagination($page, $current, $total, $items_per_page) {
 	$url = "";
 	
 	$page_count = ceil($total / $items_per_page);
+	if ($current > $page_count) {
+		$current = $page_count;
+	}
 	
 	$html = "";
+	$html_arr = [];
 	
 	if ($page_count <= 7) {
 		for ($i = 1; $i <= $page_count; $i++) {
-			$html .= "<a href='{$url}$i'><span>$i</span></a>";
+			$html_arr[] = $i;
 		}
 	}
 	
 	if ($page_count > 7 && $page_count <= 20) {
 		for ($i = 1; $i <= 3; $i++) {
-			$html .= "<a href='{$url}$i'><span>$i</span></a>";
+			$html_arr[] = $i;
 		}
-		$html .= " . . . ";
 		for ($i = $page_count - 2; $i <= $page_count; $i++) {
-			$html .= "<a href='{$url}$i'><span>$i</span></a>";
+			$html_arr[] = $i;
 		}
 	}
 	
 	if ($page_count > 20) {
 		for ($i = 1; $i <= 3; $i++) {
-			$html .= "<a href='{$url}$i'><span>$i</span></a>";
+			$html_arr[] = $i;
 		}
 		for ($i = 10; $i < $page_count; $i += 20) {
-			$html .= " . . . ";
-			$html .= "<a href='{$url}$i'><span>$i</span></a>";
+			$html_arr[] = $i;
 		}
-		$html .= " . . . ";
 		for ($i = $page_count - 2; $i <= $page_count; $i++) {
-			$html .= "<a href='{$url}$i'><span>$i</span></a>";
+			$html_arr[] = $i;
 		}
 	}
+	
+	if (!in_array($current - 1, $html_arr) && $current > 1) { $html_arr[] = $current -1 ; }
+	if (!in_array($current, $html_arr)) { $html_arr[] = $current; }
+	if (!in_array($current + 1, $html_arr) && $current < $page_count) { $html_arr[] = $current + 1; }
+	sort($html_arr);
+	$html_arr = array_unique($html_arr);
+	
+	$previous = max(1, $current - 1);
+	$html .= "<a number=$previous href=''><span>&lt;</span></a>&nbsp;&nbsp;&nbsp;";
+	foreach ($html_arr as $i => $number) {
+		if ($i > 0 && $html_arr[$i - 1] < $number - 1) {
+			$html .= " ... ";
+		}
+		$selected_html = $number == $current ? "class=current" : "";
+		$html .= "<a $selected_html number=$number href='$number'><span>$number</span></a>";
+	}
+	$next = min($current + 1, $page_count);
+	$html .= "&nbsp;&nbsp;&nbsp;<a number=$next href=''><span>&gt;</span></a>";
 	
 	return $html;
 }
