@@ -15,14 +15,21 @@ $(document).ready(function() {
 		$('.window').css({top: window.innerHeight / 6, width: wnd_w});
 		$('.window').css({left: (window.innerWidth / 2) - (wnd_w / 2) });
 		//$('.window').css({left: 100 });
-		$('.window').fadeIn(50);
+		//$('.window-modal-backbround').show();
+		$('.window-modal-backbround, .window').fadeIn(150);
 		$('.window-content').html("Movie ID: " + id);
 		$('.window-title').html($movie.find('.movie-title').text());
 		get_movie_details(id);
 	});
 	
 	$('.window-btn-close').unbind('click').bind('click', function() {
+		$('.window-modal-backbround').hide();
 		$(this).closest('.window').hide();
+	});
+	$(document).unbind('keydown').bind('keydown', function(e) {
+		if (e.keyCode == 27) {
+			$('.window-modal-backbround, .window').hide();
+		}
 	});
 	
 	$('#btn_find').unbind('click').bind('click', function() {

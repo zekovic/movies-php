@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
 <?php 
 print_site();
 
@@ -47,7 +44,8 @@ if (Info::$result && Info::$result['list']) {
 		</div>
 		<div class=window-content></div>
 	</div>
+	<div class=window-modal-backbround style="display: none;"></div>
 </div>
 <?php LibHtml::print_part('footer'); ?>
-</head>
+</body>
 </html>

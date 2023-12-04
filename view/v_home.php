@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
 <?php 
 //LibHtml::print_header();
 print_site();
-
+print_title("Home page");
 ?>
-<h2>
-Home page
 
-</h2>
-
-</head>
+</body>
 </html>

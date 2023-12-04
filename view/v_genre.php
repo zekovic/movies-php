@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
 <?php 
 //LibHtml::print_header();
 print_site();
 print_title("Genres");
 ?>
-<div>
+<div class=list-wrap>
 <?php
 if (Info::$result) {
 	foreach (Info::$result as $i => $item) { ?>
@@ -16,5 +13,5 @@ if (Info::$result) {
 } ?>
 </div>
 
-</head>
+</body>
 </html>

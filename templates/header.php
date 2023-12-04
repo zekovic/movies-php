@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?= GlobVars::$site_name ?></title>
@@ -6,5 +9,6 @@
 
 <script type="text/javascript" src="/assets/page.js?a=<?= time() ?>"></script>
 <link rel="stylesheet" type="text/css" href="/assets/style.css?a=<?= time() ?>">
-
+</head>
+<body>
 <div id=all_wrap>
