@@ -1,3 +1,32 @@
+
+function open_window(el, pos, title, callback) {
+	var $el = $(el);
+	var wnd_top = 0, wnd_left = 0, wnd_height = 0; wnd_width = 0;
+	if (pos === null) {
+		var wnd_w = window.innerWidth / 2;
+		$el.css({top: window.innerHeight / 6, width: wnd_w});
+		$el.css({left: (window.innerWidth / 2) - (wnd_w / 2) });
+	}
+	if (pos && pos.x !== undefined && pos.y !== undefined) {
+		$el.css({top: pos.y});
+		$el.css({left: pos.x});
+	}
+	
+	$('.window-modal-backbround').fadeIn(150);
+	$el.fadeIn(150);
+	if (title) {
+		$el.find('.window-title').html(title);
+	}
+	if (callback) {
+		callback;
+	}
+}
+
+function close_window(el) {
+	$('.window-modal-backbround').hide();
+	$(el).hide();
+}
+
 $(document).ready(function() {
 	
 	select_menu_item();
@@ -8,29 +37,22 @@ $(document).ready(function() {
 	$('.movie-btn-info').unbind('click').bind('click', function() {
 		var $movie = $(this).closest('.movie-item');
 		id = $movie.attr('id');
-		console.log(id);
 		
-		//$('.window').css({top: window.pageYOffset + 150});
-		var wnd_w = window.innerWidth / 2;
-		$('.window').css({top: window.innerHeight / 6, width: wnd_w});
-		$('.window').css({left: (window.innerWidth / 2) - (wnd_w / 2) });
-		//$('.window').css({left: 100 });
-		//$('.window-modal-backbround').show();
-		$('.window-modal-backbround, .window').fadeIn(150);
-		$('.window-content').html("Movie ID: " + id);
-		$('.window-title').html($movie.find('.movie-title').text());
-		get_movie_details(id);
+		open_window('#wnd_movie', null, $movie.find('.movie-title').text(), get_movie_details(id));
+		
 	});
 	
 	$('.window-btn-close').unbind('click').bind('click', function() {
-		$('.window-modal-backbround').hide();
-		$(this).closest('.window').hide();
+		//$('.window-modal-backbround').hide();
+		//$(this).closest('.window').hide();
+		close_window($(this).closest('.window'));
 	});
 	$(document).unbind('keydown').bind('keydown', function(e) {
 		if (e.keyCode == 27) {
-			$('.window-modal-backbround, .window').hide();
+			close_window('.window');
 		}
 	});
+	$('.window').draggable({handle: '.window-titlebar'});
 	
 	$('#btn_find').unbind('click').bind('click', function() {
 		find_movies();
@@ -48,8 +70,29 @@ $(document).ready(function() {
 			collapse_find_txt();
 		}
 	});
+	$('#btn_find_clear').unbind('click').bind('click', function() {
+		$('#txt_find').val('');
+		collapse_find_txt();
+	});
+	$('#btn_find_advanced').unbind('click').bind('click', function() {
+		if ($('#frm_search').is(":hidden")) {
+			open_window('#frm_search', {x: Math.max(window.innerWidth - 500, 2), y: $('#top_menu').height()}, null, null);
+		} else {
+			close_window('#frm_search');
+		}
+	});
 	
-	$('.window').draggable({handle: '.window-titlebar'});
+	$('.tab-wrap > span').unbind('click').bind('click', function() {
+		var $tabs = $(this).closest('.tab-wrap');
+		var $panels = $('#'+$tabs.attr('for'));
+		$tabs.children().removeClass('selected');
+		$(this).addClass('selected');
+		//$('#'+$(this).attr('for')+' > div').hide();
+		$panels.children().hide();
+		$panels.find('#'+$(this).attr('for')).fadeIn(150);
+	});
+	
+	
 	
 	set_pagination_links();
 	
@@ -123,6 +166,6 @@ function get_movie_details(id) {
 			result += (i+": <b>" + data_json[i] + '</b><br/>');
 		}
 		
-		$('.window-content').html(result);
+		$('#wnd_movie .window-content').html(result);
 	});
 }

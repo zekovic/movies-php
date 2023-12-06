@@ -33,6 +33,10 @@ function create_pagination($page, $current, $total, $items_per_page) {
 		$current = $page_count;
 	}
 	
+	if ($page_count <= 1) {
+		return "";
+	}
+	
 	$html = "";
 	$html_arr = [];
 	

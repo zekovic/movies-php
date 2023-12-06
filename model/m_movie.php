@@ -1,10 +1,12 @@
 <?php
 namespace Model;
-
+use DB;
 
 class Movie extends SQL_movie
 {
 	public static $items_count;
+	public $details;
+	public $id;
 	
 	protected static $options = [
 		'runtime' => ['min' => 10, 'max' => 500, ],
@@ -64,9 +66,92 @@ class Movie extends SQL_movie
 		$SQL_limit = "$SQL LIMIT $limit OFFSET $start";
 		
 		//echo $SQL;
-		$result = \DB::query($SQL_limit);
+		$result = DB::query($SQL_limit);
 		return $result;
 	}
+	
+	public function get_details()
+	{
+		$this->details = [
+			'genre' => $this->get_genre(),
+			'cast' => $this->get_cast(),
+			'crew' => $this->get_crew(),
+			'keywords' => $this->get_keywords(),
+			'country' => $this->get_country(),
+			'company' => $this->get_company(),
+			'language' => $this->get_language(),
+		];
+		
+	}
+	
+	public function get_genre()
+	{
+		$result = DB::query("SELECT mg.*, g.genre_name 
+							FROM movie_genres mg
+							LEFT JOIN genre g ON g.genre_id = mg.genre_id
+							WHERE mg.movie_id = %i", $this->id);
+		return $result ?? [];
+	}
+	
+	public function get_cast()
+	{
+		$result = DB::query("SELECT mc.*, p.person_name 
+							FROM movie_cast mc
+							LEFT JOIN person p ON p.person_id = mc.person_id
+							WHERE mc.movie_id = %i
+							ORDER BY cast_order", $this->id);
+		return $result ?? [];
+	}
+	
+	public function get_crew()
+	{
+		$result = DB::query("SELECT mcr.*, p.person_name, d.department_name
+							FROM movie_crew mcr
+							LEFT JOIN person p ON p.person_id = mcr.person_id
+							LEFT JOIN department d ON d.department_id = mcr.department_id
+							WHERE movie_id = %i
+							ORDER BY department_id", $this->id);
+		return $result ?? [];
+	}
+	
+	public function get_keywords()
+	{
+		$result = DB::query("SELECT mk.*, k.keyword_name
+							FROM movie_keywords mk
+							LEFT JOIN keyword k ON k.keyword_id = mk.keyword_id
+							WHERE mk.movie_id = %i", $this->id);
+		return $result ?? [];
+	}
+	
+	public function get_country()
+	{
+		$result = DB::query("SELECT pcnt.*, cnt.country_iso_code, cnt.country_name
+							FROM production_country pcnt
+							LEFT JOIN country cnt ON cnt.country_id = pcnt.country_id
+							WHERE pcnt.movie_id = %i", $this->id);
+		return $result ?? [];
+	}
+	
+	public function get_company()
+	{
+		$result = DB::query("SELECT mcmp.*, cmp.company_name
+							FROM movie_company mcmp
+							LEFT JOIN production_company cmp ON cmp.company_id = mcmp.company_id
+							WHERE mcmp.movie_id = %i", $this->id);
+		return $result ?? [];
+	}
+	
+	public function get_language()
+	{
+		$result = DB::query("SELECT ml.*, l.language_code, l.language_name, lr.language_role
+							FROM movie_languages ml
+							LEFT JOIN language l ON l.language_id = ml.language_id
+							LEFT JOIN language_role lr ON lr.role_id = ml.language_role_id
+							WHERE ml.movie_id = %i", $this->id);
+		return $result ?? [];
+	}
+	
+	
 }
 
 

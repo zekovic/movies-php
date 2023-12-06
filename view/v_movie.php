@@ -37,7 +37,7 @@ if (Info::$result && Info::$result['list']) {
 </div>
 
 <div>
-	<div class=window style="display: none;">
+	<div class=window id=wnd_movie style="display: none;">
 		<div class=window-titlebar>
 			<div class=window-title></div>
 			<div class=window-btn-close>x</div>

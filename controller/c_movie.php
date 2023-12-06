@@ -21,9 +21,12 @@ class MovieController extends Controller
 	
 	
 	public static function id() {
-		$found = Model\SQL_movie::get(Info::$controller_suboption);
+		//$found = Model\SQL_movie::get(Info::$controller_suboption);
+		$id = Info::$controller_suboption;
+		$found = new \Model\Movie($id);
+		$found->get_details();
 		Info::$result = $found;
-		Info::$page_title = "About {$found['title']}";
+		Info::$page_title = "About {$found->title}";
 		self::show('movie_info');
 		
 	}

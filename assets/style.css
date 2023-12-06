@@ -82,6 +82,14 @@ div {
 	color: #ebeb81;
 }
 
+#top_menu #find_wrap {
+	/*text-align: left;*/
+	
+}
+#top_menu #wrap_txt_btn_find {
+	margin: 0px 5px 0px -53px;
+	text-align: right;
+}
 #top_menu #txt_find {
 	border-radius: 5px;
 	border-width: 0px;
@@ -90,6 +98,25 @@ div {
 	margin: 0px 10px;
 	font-size: 11pt;
 	outline: none;
+}
+#top_menu #btn_find_advanced {
+	display: inline-block;
+	background: 0px 0px no-repeat url(/assets/img/Dots_Horizontal_Square_light.svg);
+	width: 24px;
+	height: 24px;
+	margin: 0px 0px -6px -5px;
+	cursor: pointer;
+}
+#top_menu #wrap_txt_btn_find svg path{
+  fill: #888;
+}
+#top_menu #btn_find_clear {
+	display: inline-block;
+	background: 0px 0px no-repeat url(/assets/img/Multiply_Square_light.svg);
+	width: 24px;
+	height: 24px;
+	margin: 0px 3px -6px -5px;
+	cursor: pointer;
 }
 #top_menu #btn_find {
 	display: inline-block;
@@ -159,6 +186,34 @@ a:HOVER {
 .movie-title { display: block; font-weight: bold; font-size: 12pt; }
 .movie-genres { font-style: italic; font-size: 10pt; }
 .movie-date { font-size: 10pt; float: right; }
+
+.movie-info > div { margin: 0px auto; padding: 15px 0px; width: 70%; max-width: 700px; border-bottom: 1px solid #99c1c5; }
+.movie-info-tagline { font-style: italic; font-size: 11pt; }
+.movie-info-date , .movie-info-rating { display: inline-block; margin: 15px 0px 0px 0px; font-size: 10pt; }
+.movie-info-date {  }
+.movie-info-rating { float: right; background-image: url(/assets/img/Star.svg); background-repeat: no-repeat; padding: 5px 0px 5px 30px; }
+.movie-info-cast { /*display: inline-block;*/ }
+.movie-info-cast > a { white-space: nowrap; margin: 5px 7px 5px 0px; font-size: 11pt; }
+/*
+.movie-info-cast > span:nth-child(odd) { background-color: #4D4D4D; }
+.movie-info-cast > span:nth-child(even) { background-color: #CCC; }
+*/
+.movie-info-crew { font-size: 11pt; }
+.movie-info-crew > div { margin: 15px 0px 5px 0px; }
+
+
+.tab-wrap { font-size: 0px; border-bottom: 0px !important; }
+.tab-wrap > span {
+	cursor: pointer;
+	padding: 5px 35px;
+	font-weight: bold;
+	font-size: 11pt;
+	/*border: 1px solid #203d91;*/
+	margin: 0px 0px 0px 0px;
+	/*background-color: #7db7ff;*/
+}
+.tab-wrap > span:HOVER { text-decoration: underline; }
+.tab-wrap > span.selected { background-color: #82d1ff; }
 
 .window { position: fixed; background: #d1f6ff; border: 1px solid #5b708f; border-radius: 6px;
 	width: 50%; height: 50%; z-index: 1000; left: 25%; top: 15%; }
