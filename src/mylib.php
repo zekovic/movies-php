@@ -88,4 +88,25 @@ function create_pagination($page, $current, $total, $items_per_page) {
 	return $html;
 }
 
+function format_long_number($val) {
+	$val = (int)$val;
+	
+	if ($val < 1000) {
+		return "$val";
+	}
+	if ($val >= 1000 && $val < 1000000) {
+		return (floor($val / 100) / 10)."K";
+	}
+	if ($val >= 1000000 && $val < 1000000000) {
+		return (floor($val / 100000) / 10)."M";
+	}
+	if ($val >= 1000000000) {
+		return (floor($val / 100000000) / 10)."B";
+	}
+	
+}
+
+
+
+
 ?>

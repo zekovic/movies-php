@@ -189,11 +189,17 @@ a:HOVER {
 
 .movie-info > div { margin: 0px auto; padding: 15px 0px; width: 70%; max-width: 700px; border-bottom: 1px solid #99c1c5; }
 .movie-info-tagline { font-style: italic; font-size: 11pt; }
+#movie_overview > div { margin: 5px 0px 20px 0px; }
 .movie-info-date , .movie-info-rating { display: inline-block; margin: 15px 0px 0px 0px; font-size: 10pt; }
 .movie-info-date {  }
 .movie-info-rating { float: right; background-image: url(/assets/img/Star.svg); background-repeat: no-repeat; padding: 5px 0px 5px 30px; }
 .movie-info-cast { /*display: inline-block;*/ }
-.movie-info-cast > a { white-space: nowrap; margin: 5px 7px 5px 0px; font-size: 11pt; }
+.movie-info-cast > a { display: block; white-space: nowrap; margin: 5px 7px 5px 0px; font-size: 11pt; }
+.movie-info-language {  }
+.movie-info-duration { float: right; }
+.movie-info-url {  }
+.movie-info-budget, .movie-info-revenue { width: 200px; }
+.movie-info-budget > span, .movie-info-revenue > span { float: right; width: 100px; }
 /*
 .movie-info-cast > span:nth-child(odd) { background-color: #4D4D4D; }
 .movie-info-cast > span:nth-child(even) { background-color: #CCC; }

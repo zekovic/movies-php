@@ -25,7 +25,9 @@ class LibHtml {
 		include GlobVars::$root_folder."/templates/$page.php";
 	}
 	
-	
+	public static function string_for_url($str) {
+		return urlencode(str_replace(" ", "-", mb_strtolower($str)));
+	}
 }
 
 
@@ -43,11 +45,15 @@ class LibTime {
 	static function yyyy_mm_dd_to_unix_2($str) {
 		return "asdfghj";
 	}
+	
+	static function hours_to_hh_mm($hours) {
+		$hours = (int)$hours;
+		$hh = floor($hours / 60);
+		$mm = $hours % 60;
+		return sprintf('%02d:%02d', $hh, $mm);
+	}
 }
 
-function do_some_things() {
-	echo "ewsufnhkcdg rkdjgnhtrkghrhjg ";
-}
 
 function connect_db() {
 	//require_once GlobVars::$system_folder."/db.class.php";
