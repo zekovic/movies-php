@@ -54,7 +54,7 @@ class Movie extends SQL_movie
 			$where_str = " WHERE ".implode(" AND ", $where_arr);
 		}
 		$SQL = "
-			SELECT m.movie_id, m.title, /*m.overview,*/ m.release_date, group_concat(g.genre_name SEPARATOR', ') AS genres
+			SELECT m.movie_id, m.title, m.vote_average, m.release_date, group_concat(g.genre_name SEPARATOR', ') AS genres
 			FROM movie m
 			LEFT JOIN movie_genres mg ON mg.movie_id = m.movie_id
 			LEFT JOIN genre g ON g.genre_id = mg.genre_id

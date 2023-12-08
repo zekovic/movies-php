@@ -175,19 +175,21 @@ a:HOVER {
 
 .list-wrap {  }
 
-.movie-item { margin: 0px auto; padding: 15px 20px; width: 60%; max-width: 550px;
-	cursor: default; border-bottom: 1px solid #99c1c5; }
+.movie-item { margin: 0px auto; padding: 10px 10px 20px 10px; width: 90%; max-width: 550px;
+	cursor: default; border-bottom: 1px dotted #99c1c5; }
 
 
 .movie-btn-info { display: none; margin: 0px 0px 0px 2px; cursor: pointer; width: 18px; height: 18px; background-image: url(/assets/img/Information_Square.svg);
 	background-repeat: no-repeat; background-size: 18px 18px; vertical-align: bottom; }
 .movie-item:HOVER { background-color: #b8e3f7; }
 .movie-item:HOVER .movie-btn-info { display: inline-block; }
-.movie-title { display: block; font-weight: bold; font-size: 12pt; }
-.movie-genres { font-style: italic; font-size: 10pt; }
-.movie-date { font-size: 10pt; float: right; }
+.movie-title { display: block; margin: 0px 0px 5px 0px; font-weight: bold; font-size: 12pt; }
+.movie-genres { display: inline-block; max-width: 70%; font-style: italic; font-size: 10pt; }
+.movie-date-rating { margin: 3px 0px 0px 0px; font-size: 10pt; float: right; }
+.movie-rating { background-image: url(/assets/img/Star.svg); background-repeat: no-repeat; padding: 0px 8px 5px 20px; background-size: 16px; }
+.movie-date {  }
 
-.movie-info > div { margin: 0px auto; padding: 15px 0px; width: 70%; max-width: 700px; border-bottom: 1px solid #99c1c5; }
+.movie-info > div { margin: 0px auto; padding: 15px 0px; width: 90%; max-width: 700px; border-bottom: 1px solid #99c1c5; }
 .movie-info-tagline { font-style: italic; font-size: 11pt; }
 #movie_overview > div { margin: 5px 0px 20px 0px; }
 .movie-info-date , .movie-info-rating { display: inline-block; margin: 15px 0px 0px 0px; font-size: 10pt; }
@@ -211,15 +213,16 @@ a:HOVER {
 .tab-wrap { font-size: 0px; border-bottom: 0px !important; }
 .tab-wrap > span {
 	cursor: pointer;
-	padding: 5px 35px;
+	padding: 5px 5%;
 	font-weight: bold;
 	font-size: 11pt;
 	/*border: 1px solid #203d91;*/
 	margin: 0px 0px 0px 0px;
 	/*background-color: #7db7ff;*/
+	color: #8b9195;
 }
-.tab-wrap > span:HOVER { text-decoration: underline; }
-.tab-wrap > span.selected { background-color: #82d1ff; }
+.tab-wrap > span:HOVER { /*text-decoration: underline;*/ color: #266081; }
+.tab-wrap > span.selected { /*background-color: #82d1ff;*/ border-bottom: 2px solid #266081; color: #266081; /*#82d1ff;*/ /*#008cff;*/ }
 
 .window { position: fixed; background: #d1f6ff; border: 1px solid #5b708f; border-radius: 6px;
 	width: 50%; height: 50%; z-index: 1000; left: 25%; top: 15%; }

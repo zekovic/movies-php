@@ -24,7 +24,10 @@ if (Info::$result && Info::$result['list']) {
 				<span class=movie-btn-info></span>
 			</span>
 			<span class=movie-genres><?= implode(" ", $genres_url_arr) ?>&nbsp;</span>
-			<span class=movie-date><a href="/movie/year/<?= $year ?>"><?= $item['release_date'] ?></a></span>
+			<span class=movie-date-rating>
+				<span class=movie-rating><?= "{$item['vote_average']}" ?></span>
+				<span class=movie-date><a href="/movie/year/<?= $year ?>"><?= $item['release_date'] ?></a></span>
+			</span>
 		</div>
 		
 	<?php
