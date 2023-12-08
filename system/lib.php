@@ -54,14 +54,21 @@ class LibTime {
 	}
 }
 
-
-function connect_db() {
-	//require_once GlobVars::$system_folder."/db.class.php";
-	DB::$user = GlobVars::$db_user;
-	DB::$password = GlobVars::$db_password;
-	DB::$dbName = GlobVars::$db_dbName;
-	DB::$encoding = GlobVars::$db_encoding;
+class LibDB {
+	static function connect_db() {
+		//require_once GlobVars::$system_folder."/db.class.php";
+		DB::$user = GlobVars::$db_user;
+		DB::$password = GlobVars::$db_password;
+		DB::$dbName = GlobVars::$db_dbName;
+		DB::$encoding = GlobVars::$db_encoding;
+	}
+	
+	static function clear_string($str) {
+		var_dump($str);
+		return str_ireplace(["%"], [""], $str);
+	}
 }
+
 
 
 class Info {

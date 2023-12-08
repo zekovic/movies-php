@@ -22,7 +22,6 @@ class Table
 			$val = (int)$val;
 			$name = static::$db_name;
 			$pk = static::$primary_key;
-			connect_db();
 			$this->values = DB::queryFirstRow("SELECT * FROM $name WHERE $pk = $val");
 			//echo DB::lastQuery();
 			if ($this->values){
@@ -79,7 +78,6 @@ class Table
 	
 	public static function load_data($limit = NULL)
 	{
-		connect_db();
 		$limit_str = "";
 		if ($limit) {
 			$limit_str = " LIMIT ".(int)$limit." ";
@@ -148,7 +146,6 @@ class Column
 }
 
 function make_sql_tables_code() {
-	connect_db();
 	$tables_list = DB::tableList();
 	$tables = [];
 	$columns = [];

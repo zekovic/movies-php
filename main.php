@@ -11,7 +11,7 @@ date_default_timezone_set(TIMEZONE);
 require_once GlobVars::$system_folder."/db.class.php";
 
 require_once GlobVars::$system_folder.'/lib.php';
-connect_db();
+LibDB::connect_db();
 
 require_once GlobVars::$system_folder."/model.php";
 require_once GlobVars::$system_folder."/m_count_cache.php";

@@ -1,6 +1,7 @@
 <?php
 namespace Model;
 use DB;
+use LibDB;
 
 class Movie extends SQL_movie
 {
@@ -40,13 +41,18 @@ class Movie extends SQL_movie
 		$limit = ($limit ? (int)$limit : 100);
 		$start = ($start ? (int)$start : (\Info::$page_number - 1) * $limit);
 		$where_arr = [];
+		$db_args = [];
 		$genre_filter = "";
 		if (count($filters)) {
 			foreach ($filters as $i => $item) {
+				$item = LibDB::clear_string($item);
 				//if ($i == 'genre') { $item = trim($item); $where_arr[] = "g.genre_name LIKE '%$item%'"; }
-				if ($i == 'genre') { $item = trim($item); $genre_filter = " HAVING genres LIKE '%$item%'"; }
-				if ($i == 'year') { $item = (int)$item; $where_arr[] = "release_date LIKE '%$item%'"; }
-				if ($i == 'title') { $where_arr[] = "title LIKE '%$item%'"; }
+				//if ($i == 'genre') { $item = trim($item); $genre_filter = " HAVING genres LIKE '%$item%'"; }
+				if ($i == 'genre') { $item = trim($item); $genre_filter = " HAVING genres LIKE %s_genre"; $db_args['genre'] = "%$item%"; }
+				//if ($i == 'year') { $item = (int)$item; $where_arr[] = "release_date LIKE '%$item%'"; }
+				if ($i == 'year') { $item = (int)$item; $where_arr[] = "release_date LIKE %s_year"; $db_args['year'] = "%$item%"; }
+				//if ($i == 'title') { $where_arr[] = "title LIKE '%$item%'"; }
+				if ($i == 'title') { $where_arr[] = "title LIKE %s_title"; $db_args['title'] = "%$item%"; }
 			}
 		}
 		$where_str = "";
@@ -62,10 +68,11 @@ class Movie extends SQL_movie
 			GROUP BY m.movie_id
 			$genre_filter
 		";
-		self::$items_count = CountCache::get_count($SQL);
-		$SQL_limit = "$SQL LIMIT $limit OFFSET $start";
+		$SQL_parsed = DB::parse($SQL, $db_args);
+		//echo "$SQL \n\n $SQL_parsed";
+		self::$items_count = CountCache::get_count($SQL_parsed);
+		$SQL_limit = "$SQL_parsed LIMIT $limit OFFSET $start";
 		
-		//echo $SQL;
 		$result = DB::query($SQL_limit);
 		return $result;
 	}

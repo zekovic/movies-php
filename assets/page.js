@@ -144,7 +144,7 @@ function find_movies() {
 	if (find_str.length < 3) {
 		return;
 	}
-	var new_url = "/movie/find/?filter="+JSON.stringify({title: find_str});
+	var new_url = "/movie/find/?filter="+JSON.stringify({title: prepare_url_string(find_str)});
 	location.href = new_url;
 }
 
@@ -173,3 +173,9 @@ function get_movie_details(id) {
 		$('#wnd_movie .window-content').html(result);
 	});
 }
+
+function prepare_url_string(str) {
+	//str = str.replaceAll('#', '%23');
+	return encodeURIComponent(str);
+}
+
