@@ -121,6 +121,7 @@ function set_pagination_links() {
 }
 
 function expand_find_txt(duration) {
+	if ($('#txt_find').attr('is_expanded') == 'yes') { return; }
 	if (duration === undefined) {duration = 200};
 	var $txt = $('#txt_find');
 	if ($txt.attr('original_width') === undefined) {
@@ -128,10 +129,13 @@ function expand_find_txt(duration) {
 		$txt.css('min-width', $txt.width());
 	}
 	$txt.animate({'width': '35%'}, duration);
+	$txt.attr('is_expanded', 'yes');
 }
 function collapse_find_txt() {
+	if ($('#txt_find').attr('is_expanded') == 'no') { return; }
 	setTimeout(function() {
 		$('#txt_find').animate({'width': $('#txt_find').attr('original_width')}, 200);
+		$('#txt_find').attr('is_expanded', 'no');
 	}, 100);
 }
 
