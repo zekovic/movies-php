@@ -55,11 +55,23 @@ function create_pagination($page, $current, $total, $items_per_page) {
 		}
 	}
 	
-	if ($page_count > 20) {
+	if ($page_count > 20 && $page_count <= 100) {
 		for ($i = 1; $i <= 3; $i++) {
 			$html_arr[] = $i;
 		}
 		for ($i = 10; $i < $page_count; $i += 20) {
+			$html_arr[] = $i;
+		}
+		for ($i = $page_count - 2; $i <= $page_count; $i++) {
+			$html_arr[] = $i;
+		}
+	}
+	
+	if ($page_count > 100) {
+		for ($i = 1; $i <= 3; $i++) {
+			$html_arr[] = $i;
+		}
+		for ($i = 10; $i < $page_count; $i += floor($page_count / 2)) {
 			$html_arr[] = $i;
 		}
 		for ($i = $page_count - 2; $i <= $page_count; $i++) {
@@ -76,8 +88,8 @@ function create_pagination($page, $current, $total, $items_per_page) {
 	$previous = max(1, $current - 1);
 	$html .= "<a number=$previous href=''><span>&lt;</span></a>&nbsp;&nbsp;&nbsp;";
 	foreach ($html_arr as $i => $number) {
-		if ($i > 0 && $html_arr[$i - 1] < $number - 1) {
-			$html .= " ... ";
+		if ($i > 0 && isset($html_arr[$i - 1]) && $html_arr[$i - 1] < $number - 1) {
+			$html .= " &nbsp; ";
 		}
 		$selected_html = $number == $current ? "class=current" : "";
 		$html .= "<a $selected_html number=$number href='$number'><span>$number</span></a>";

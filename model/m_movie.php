@@ -38,7 +38,7 @@ class Movie extends SQL_movie
 	
 	public static function get_movie_list($limit = null, $start = 0, $filters = [])
 	{
-		$limit = ($limit ? (int)$limit : 100);
+		$limit = ($limit ? (int)$limit : \GlobVars::$pagination_size);
 		$start = ($start ? (int)$start : (\Info::$page_number - 1) * $limit);
 		$where_arr = [];
 		$db_args = [];

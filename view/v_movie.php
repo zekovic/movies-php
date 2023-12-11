@@ -2,7 +2,7 @@
 print_site();
 
 print_title(Info::$page_title);
-$pagination_html = create_pagination("movie", Info::$page_number, Info::$result['total'], 100);
+$pagination_html = create_pagination("movie", Info::$page_number, Info::$result['total'], \GlobVars::$pagination_size);
 echo "<div class=pagination>$pagination_html</div>";
 ?>
 <div class=list-wrap>

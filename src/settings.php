@@ -3,6 +3,7 @@
 class GlobVars {
 	static $site_name = "Movies";
 	static $home_page = "home";
+	static $pagination_size = 30;
 	
 	static $db_user = "new_user";
 	static $db_password = "321pwdpwd";
