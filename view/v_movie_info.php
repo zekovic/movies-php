@@ -10,7 +10,7 @@ $data = Info::$result->details;
 $genres_url_arr = [];
 foreach ($data['genre'] as $j => $item) {
 	$genre_name = trim($item['genre_name']);
-	$genres_url_arr[] = "<a target='_blank' href='/movie/genre/$genre_name'>$genre_name</a>";
+	$genres_url_arr[] = "<a href='/movie/genre/$genre_name'>$genre_name</a>";
 }
 $lang_arr = [];
 foreach ($data['language'] as $i => $item) {
@@ -21,14 +21,14 @@ $lang_arr = array_unique($lang_arr);
 $company_arr = [];
 foreach ($data['company'] as $i => $item) {
 	$href_company = LibHtml::string_for_url($item['company_name']);
-	$company_arr[] = "<a target=_blank href=/company/$href_company>{$item['company_name']}</a>";
+	$company_arr[] = "<a href=/company/$href_company>{$item['company_name']}</a>";
 }
 
 $cast_html = "";
 $cast_summary = "Cast: <br/>";
 foreach ($data['cast'] as $i => $item) {
-	$href = "/actor/".LibHtml::string_for_url($item['person_name']);
-	$item_html = "<a href='$href' target='_blank'><span><b>{$item['character_name']}</b> ({$item['person_name']})</span></a> ";
+	$href = "/actor/{$item['person_id']}-".LibHtml::string_to_permalink($item['person_name']);
+	$item_html = "<a href='$href'><span><b>{$item['character_name']}</b> ({$item['person_name']})</span></a> ";
 	$cast_html .= $item_html;
 	if ($i < 5) {
 		$cast_summary .= $item_html;
@@ -51,8 +51,8 @@ $crew_summary = isset($crew_arr['Directing']) ? "Directing: " : "";
 foreach ($crew_arr as $i => $department) {
 	$crew_html .= "<div><b>$i</b></div>";
 	foreach ($department as $j => $item) {
-		$href = "/crew/".LibHtml::string_for_url($item['person_name']);
-		$item_html = "<a href='$href' target='_blank'><div><b>{$item['person_name']}</b> - {$item['job']}</div></a> ";
+		$href = "/crew/{$item['person_id']}-".LibHtml::string_to_permalink($item['person_name']);
+		$item_html = "<a href='$href'><div><b>{$item['person_name']}</b> - {$item['job']}</div></a> ";
 		$crew_html .= $item_html;
 		if ($i == "Directing") {
 			$crew_summary .= $item_html;
@@ -71,7 +71,7 @@ $year = $movie->release_date ? substr($movie->release_date, 0, 4) : "";
 		<h2><?= $movie->title ?></h2>
 		<div class=movie-info-tagline><?= $movie->tagline ?></div>
 		<div>
-			<span class=movie-info-date><a target='_blank' href="/movie/year/<?= $year ?>"><?= $movie->release_date ?></a></span>
+			<span class=movie-info-date><a href="/movie/year/<?= $year ?>"><?= $movie->release_date ?></a></span>
 			<span class=movie-info-rating><?= "$movie->vote_average / 10 ($movie->vote_count)" ?></span>
 		</div>
 		<div><span class=movie-genres><?= implode(" ", $genres_url_arr) ?>&nbsp;</span></div>
@@ -94,7 +94,7 @@ $year = $movie->release_date ? substr($movie->release_date, 0, 4) : "";
 				<span class=movie-info-duration>Duration: <?php echo LibTime::hours_to_hh_mm($movie->runtime); ?></span>
 			</div>
 			<div class=movie-info-company><?= implode(", ", $company_arr) ?></div>
-			<div class=movie-info-url><?= $movie->homepage ? "<a href='$movie->homepage' target=_blenk>$movie->homepage</a>" : '' ?></div>
+			<div class=movie-info-url><?= $movie->homepage ? "<a href='$movie->homepage'>$movie->homepage</a>" : '' ?></div>
 			<div class=movie-info-budget>Budget: <span><?= $movie->budget ? "$".format_long_number($movie->budget) : '' ?></span></div>
 			<div class=movie-info-revenue>Revenue: <span><?= $movie->revenue ? "$".format_long_number($movie->revenue) : '' ?></span></div>
 			<div><?= $crew_summary ?></div>

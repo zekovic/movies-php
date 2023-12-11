@@ -32,6 +32,10 @@ class LibHtml {
 	public static function url_to_string($str) {
 		return urldecode($str);
 	}
+	
+	public static function string_to_permalink($str) {
+		return urlencode(str_replace(" ", "-", mb_strtolower($str)));
+	}
 }
 
 
@@ -68,7 +72,6 @@ class LibDB {
 	}
 	
 	static function clear_string($str) {
-		var_dump($str);
 		return str_ireplace(["%"], [""], $str);
 	}
 }
