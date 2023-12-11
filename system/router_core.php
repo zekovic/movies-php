@@ -43,6 +43,7 @@ class Router {
 		
 		if (count(Info::$request['path'])) {
 			Info::$controller = Info::$request['path'][0];
+			Info::$original_route = Info::$request['path'][0];
 			if (isset(static::$routes[Info::$request['path'][0]]) ) {
 				Info::$controller = static::$routes[Info::$request['path'][0]];
 			}

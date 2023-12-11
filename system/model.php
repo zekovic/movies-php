@@ -15,7 +15,7 @@ class Table
 	protected static $keys = [];
 	
 	protected $values = [];
-	public $id = null;
+	protected $_pk_id = null;
 	
 	public function __construct($val = null) {
 		if ($val && is_numeric($val)) {
@@ -31,7 +31,7 @@ class Table
 		if ($val && is_array($val)) {
 			$this->values = $val;
 		}
-		$this->id = $this->get_id();
+		$this->_pk_id = $this->get_id();
 	}
 	
 	public static function get($val) {
@@ -48,6 +48,10 @@ class Table
 			return null;
 		}
 		return $this->values[static::$primary_key];
+	}
+	public function id()
+	{
+		return $this->_pk_id;
 	}
 	
 	private function prepare_values()
@@ -104,7 +108,7 @@ class Table
 		$this->prepare_value($name, $value);
 		
 		$this->values[$name] = $value;
-		$this->id = $this->get_id();
+		$this->_pk_id = $this->get_id();
 	}
 	
 	public function __get($name)

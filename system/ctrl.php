@@ -20,10 +20,10 @@ class Controller
 	{
 		
 		$calling_function = Info::$controller_option ? Info::$controller_option : 'index';
-		if (method_exists(static::class, $calling_function)) {
-			static::class::$calling_function();
-			
+		if (!method_exists(static::class, $calling_function)) {
+			$calling_function = 'index';
 		}
+		static::class::$calling_function();
 		//var_dump($calling_function);
 		
 	}

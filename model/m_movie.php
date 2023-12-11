@@ -7,7 +7,7 @@ class Movie extends SQL_movie
 {
 	public static $items_count;
 	public $details;
-	public $id;
+	//public $id;
 	
 	protected static $options = [
 		'runtime' => ['min' => 10, 'max' => 500, ],
@@ -96,7 +96,7 @@ class Movie extends SQL_movie
 		$result = DB::query("SELECT mg.*, g.genre_name 
 							FROM movie_genres mg
 							LEFT JOIN genre g ON g.genre_id = mg.genre_id
-							WHERE mg.movie_id = %i", $this->id);
+							WHERE mg.movie_id = %i", $this->id());
 		return $result ?? [];
 	}
 	
@@ -106,7 +106,7 @@ class Movie extends SQL_movie
 							FROM movie_cast mc
 							LEFT JOIN person p ON p.person_id = mc.person_id
 							WHERE mc.movie_id = %i
-							ORDER BY cast_order", $this->id);
+							ORDER BY cast_order", $this->id());
 		return $result ?? [];
 	}
 	
@@ -117,7 +117,7 @@ class Movie extends SQL_movie
 							LEFT JOIN person p ON p.person_id = mcr.person_id
 							LEFT JOIN department d ON d.department_id = mcr.department_id
 							WHERE movie_id = %i
-							ORDER BY department_id", $this->id);
+							ORDER BY department_id", $this->id());
 		return $result ?? [];
 	}
 	
@@ -126,7 +126,7 @@ class Movie extends SQL_movie
 		$result = DB::query("SELECT mk.*, k.keyword_name
 							FROM movie_keywords mk
 							LEFT JOIN keyword k ON k.keyword_id = mk.keyword_id
-							WHERE mk.movie_id = %i", $this->id);
+							WHERE mk.movie_id = %i", $this->id());
 		return $result ?? [];
 	}
 	
@@ -135,7 +135,7 @@ class Movie extends SQL_movie
 		$result = DB::query("SELECT pcnt.*, cnt.country_iso_code, cnt.country_name
 							FROM production_country pcnt
 							LEFT JOIN country cnt ON cnt.country_id = pcnt.country_id
-							WHERE pcnt.movie_id = %i", $this->id);
+							WHERE pcnt.movie_id = %i", $this->id());
 		return $result ?? [];
 	}
 	
@@ -144,7 +144,7 @@ class Movie extends SQL_movie
 		$result = DB::query("SELECT mcmp.*, cmp.company_name
 							FROM movie_company mcmp
 							LEFT JOIN production_company cmp ON cmp.company_id = mcmp.company_id
-							WHERE mcmp.movie_id = %i", $this->id);
+							WHERE mcmp.movie_id = %i", $this->id());
 		return $result ?? [];
 	}
 	
@@ -154,7 +154,7 @@ class Movie extends SQL_movie
 							FROM movie_languages ml
 							LEFT JOIN language l ON l.language_id = ml.language_id
 							LEFT JOIN language_role lr ON lr.role_id = ml.language_role_id
-							WHERE ml.movie_id = %i", $this->id);
+							WHERE ml.movie_id = %i", $this->id());
 		return $result ?? [];
 	}
 	

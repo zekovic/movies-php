@@ -26,7 +26,11 @@ class LibHtml {
 	}
 	
 	public static function string_for_url($str) {
-		return urlencode(str_replace(" ", "-", mb_strtolower($str)));
+		return urlencode(mb_strtolower($str));
+	}
+	
+	public static function url_to_string($str) {
+		return urldecode($str);
 	}
 }
 
@@ -74,6 +78,7 @@ class LibDB {
 class Info {
 	public static $request = ["url" => null, "args" => null, "query" => null, "path" => null];
 	public static $controller = false;
+	public static $original_route = false;
 	public static $controller_option = false;
 	public static $controller_suboption = false;
 	public static $result;
