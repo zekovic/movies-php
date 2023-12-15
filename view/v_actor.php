@@ -2,12 +2,20 @@
 print_site();
 
 print_title(Info::$page_title);
+
+$person = Info::$result['person'];
+$movie_list = Info::$result['movie_list'];
 ?>
 
-<h2>Actor</h2>
+<div class=person-info>
+	<div>
+		<h2><?= $person->person_name ?></h2>
+	</div>
+</div>
 
 <?php
-var_dump(Info::$result['person']->actor_info);
+var_dump($person->person_movies);
+var_dump($movie_list);
 ?>
 
 <?php LibHtml::print_part('footer'); ?>

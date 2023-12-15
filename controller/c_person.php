@@ -1,6 +1,7 @@
 <?php
 
 require_once GlobVars::$root_folder."/model/m_person.php";
+require_once GlobVars::$root_folder."/model/m_movie.php";
 
 use Model\Person;
 
@@ -27,6 +28,8 @@ class PersonController extends Controller
 				Info::$page_title = "Info about actor: $person->person_name";
 			}
 		}
+		
+		Info::$result['movie_list'] = \Model\Movie::get_movie_list(-1, 0, ['id_list' => array_keys($person->person_movies)]);
 		Info::$result['person'] = $person;
 		self::show(Info::$original_route);
 	}

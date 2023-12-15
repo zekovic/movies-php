@@ -46,13 +46,10 @@ class Movie extends SQL_movie
 		if (count($filters)) {
 			foreach ($filters as $i => $item) {
 				$item = LibDB::clear_string($item);
-				//if ($i == 'genre') { $item = trim($item); $where_arr[] = "g.genre_name LIKE '%$item%'"; }
-				//if ($i == 'genre') { $item = trim($item); $genre_filter = " HAVING genres LIKE '%$item%'"; }
 				if ($i == 'genre') { $item = trim($item); $genre_filter = " HAVING genres LIKE %s_genre"; $db_args['genre'] = "%$item%"; }
-				//if ($i == 'year') { $item = (int)$item; $where_arr[] = "release_date LIKE '%$item%'"; }
 				if ($i == 'year') { $item = (int)$item; $where_arr[] = "release_date LIKE %s_year"; $db_args['year'] = "%$item%"; }
-				//if ($i == 'title') { $where_arr[] = "title LIKE '%$item%'"; }
 				if ($i == 'title') { $where_arr[] = "title LIKE %s_title"; $db_args['title'] = "%$item%"; }
+				if ($i == 'id_list') { $where_arr[] = "m.movie_id IN %li_id"; $db_args['id'] = $item; }
 			}
 		}
 		$where_str = "";
@@ -67,11 +64,15 @@ class Movie extends SQL_movie
 			$where_str
 			GROUP BY m.movie_id
 			$genre_filter
+			ORDER BY m.release_date, m.movie_id
 		";
 		$SQL_parsed = DB::parse($SQL, $db_args);
 		//echo "$SQL \n\n $SQL_parsed";
-		self::$items_count = CountCache::get_count($SQL_parsed);
-		$SQL_limit = "$SQL_parsed LIMIT $limit OFFSET $start";
+		$SQL_limit = $SQL_parsed;
+		if ($limit != -1) {
+			self::$items_count = CountCache::get_count($SQL_parsed);
+			$SQL_limit = "$SQL_parsed LIMIT $limit OFFSET $start";
+		}
 		
 		$result = DB::query($SQL_limit);
 		return $result;
