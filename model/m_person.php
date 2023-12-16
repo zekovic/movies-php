@@ -13,7 +13,7 @@ class Person extends SQL_person
 	
 	public function get_crew_details()
 	{
-		$result = DB::query("SELECT d.department_name, mcr.* FROM movie_crew mcr
+		$result = DB::query("SELECT m.title, d.department_name, mcr.* FROM movie_crew mcr
 							LEFT JOIN movie m ON m.movie_id = mcr.movie_id
 							LEFT JOIN department d ON mcr.department_id = d.department_id
 							WHERE person_id = %i
@@ -22,11 +22,17 @@ class Person extends SQL_person
 	}
 	public function get_actor_details()
 	{
-		$result = DB::query("SELECT mc.* FROM movie_cast mc
+		$result = DB::query("SELECT m.title, mc.* FROM movie_cast mc
 							LEFT JOIN movie m ON m.movie_id = mc.movie_id
 							WHERE person_id = %i
 							ORDER BY m.release_date, m.movie_id, mc.cast_order", $this->id());
-		$this->group_by_movies($result ?? []);
+		
+		$this->values['actor_movies'] = [];
+		if ($result) {
+			foreach ($result as $i => $item) {
+				$this->values['actor_movies'][$item['movie_id']] = $item;
+			}
+		}
 	}
 	
 	private function group_by_movies($items)

@@ -69,6 +69,19 @@ foreach ($movie_list as $i => $item) {
 
 </div>
 
+<div class=movie-item>
+<?php
+
+if (count($person->actor_movies)) {
+	$movie_titles = array_column($person->actor_movies, 'title');
+	$movie_titles_str = implode(",<br/> ", $movie_titles);
+	$href = "/actor/{$person->person_id}-".LibHtml::string_to_permalink($person->person_name);
+	echo "<h4>Also actor in movies:</h4> <div><a href='$href'>$movie_titles_str</a></div>";
+}
+
+?>
+</div>
+
 <?php LibHtml::print_part('footer'); ?>
 
 <div>

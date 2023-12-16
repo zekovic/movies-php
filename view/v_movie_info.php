@@ -28,10 +28,15 @@ $cast_html = "";
 $cast_summary = "Cast: <br/>";
 foreach ($data['cast'] as $i => $item) {
 	$href = "/actor/{$item['person_id']}-".LibHtml::string_to_permalink($item['person_name']);
-	$item_html = "<a href='$href'><span><b>{$item['character_name']}</b> ({$item['person_name']})</span></a> ";
-	$cast_html .= $item_html;
+	$characters = explode("/", $item['character_name']);
+	$item_html_summary = "<a href='$href'><span><b>{$item['character_name']}</b> ({$item['person_name']})</span></a> ";
+	//$item_html_summary = "<a href='$href'><span><b>".trim($characters[0])."</b> ({$item['person_name']})</span></a> ";
+	foreach ($characters as $j => $character) {
+		$item_html = "<a href='$href'><span><b>".trim($character)."</b> ({$item['person_name']})</span></a> ";
+		$cast_html .= $item_html;
+	}
 	if ($i < 5) {
-		$cast_summary .= $item_html;
+		$cast_summary .= $item_html_summary;
 	}
 	if ($i == 5) {
 		$cast_summary .= "...";
@@ -94,7 +99,7 @@ $year = $movie->release_date ? substr($movie->release_date, 0, 4) : "";
 				<span class=movie-info-duration>Duration: <?php echo LibTime::hours_to_hh_mm($movie->runtime); ?></span>
 			</div>
 			<div class=movie-info-company><?= implode(", ", $company_arr) ?></div>
-			<div class=movie-info-url><?= $movie->homepage ? "<a href='$movie->homepage'>$movie->homepage</a>" : '' ?></div>
+			<div class=movie-info-url><?= $movie->homepage ? "<a target=_blank href='$movie->homepage'>$movie->homepage</a>" : '' ?></div>
 			<div class=movie-info-budget>Budget: <span><?= $movie->budget ? "$".format_long_number($movie->budget) : '' ?></span></div>
 			<div class=movie-info-revenue>Revenue: <span><?= $movie->revenue ? "$".format_long_number($movie->revenue) : '' ?></span></div>
 			<div><?= $crew_summary ?></div>
@@ -105,6 +110,16 @@ $year = $movie->release_date ? substr($movie->release_date, 0, 4) : "";
 		</div>
 		<div class="tab movie-info-crew" id=movie_crew style="display: none;">
 			<?= $crew_html; ?>
+		</div>
+	</div>
+	<div class=movie-info-keywords>
+		<div>
+		<?php
+			echo " - ";
+			foreach ($data['keywords'] as $i => $item) {
+				echo "<span>{$item['keyword_name']}</span> - ";
+			}
+		?>
 		</div>
 	</div>
 </div>

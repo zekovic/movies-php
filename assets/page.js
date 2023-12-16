@@ -106,7 +106,7 @@ $(document).ready(function() {
 			$wrap.find('.tag-item').removeClass('selected');
 			return;
 		}
-		$('.movie-item').hide();
+		$('['+tag_name+']').closest('.movie-item').hide();
 		$('['+tag_name+']').removeClass('marked-tag');
 		$('.tag-item.selected').each(function() {
 			var $found_items = $('['+tag_name+'="'+tag_name+'-'+$(this).attr('id')+'"]');

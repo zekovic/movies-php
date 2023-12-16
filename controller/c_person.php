@@ -18,18 +18,25 @@ class PersonController extends Controller
 		}
 		Info::$result = ['person_type' => Info::$original_route];
 		
+		$person->get_crew_details();
+		$person->get_actor_details();
 		if ($person) {
 			if (Info::$original_route == 'crew') {
-				$person->get_crew_details();
 				Info::$page_title = "Info about crew: $person->person_name";
 			}
 			if (Info::$original_route == 'actor') {
-				$person->get_actor_details();
 				Info::$page_title = "Info about actor: $person->person_name";
 			}
 		}
 		
-		Info::$result['movie_list'] = \Model\Movie::get_movie_list(-1, 0, ['id_list' => array_keys($person->person_movies)]);
+		Info::$result['movie_list'] = [];
+		Info::$result['movie_list_actor'] = [];
+		if (count($person->person_movies)) {
+			Info::$result['movie_list'] = \Model\Movie::get_movie_list(-1, 0, ['id_list' => array_keys($person->person_movies)]);
+		}
+		if (count($person->actor_movies)) {
+			Info::$result['movie_list_actor'] = \Model\Movie::get_movie_list(-1, 0, ['id_list' => array_column($person->actor_movies, 'movie_id')]);
+		}
 		Info::$result['person'] = $person;
 		self::show(Info::$original_route);
 	}
