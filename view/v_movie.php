@@ -39,16 +39,6 @@ if (Info::$result && Info::$result['list']) {
 	<?php echo $pagination_html; ?>
 </div>
 
-<div>
-	<div class=window id=wnd_movie style="display: none;">
-		<div class=window-titlebar>
-			<div class=window-title></div>
-			<div class=window-btn-close>x</div>
-		</div>
-		<div class=window-content></div>
-	</div>
-	<div class=window-modal-backbround style="display: none;"></div>
-</div>
 <?php LibHtml::print_part('footer'); ?>
 </body>
 </html>

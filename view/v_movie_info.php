@@ -124,16 +124,6 @@ $year = $movie->release_date ? substr($movie->release_date, 0, 4) : "";
 	</div>
 </div>
 
-
-<div>
-	<div class=window style="display: none;">
-		<div class=window-titlebar>
-			<div class=window-title></div>
-			<div class=window-btn-close>x</div>
-		</div>
-		<div class=window-content></div>
-	</div>
-</div>
 <?php LibHtml::print_part('footer'); ?>
 </head>
 </html>

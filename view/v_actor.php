@@ -73,16 +73,5 @@ if (count($person->person_movies)) {
 
 <?php LibHtml::print_part('footer'); ?>
 
-<div>
-	<div class=window id=wnd_movie style="display: none;">
-		<div class=window-titlebar>
-			<div class=window-title></div>
-			<div class=window-btn-close>x</div>
-		</div>
-		<div class=window-content></div>
-	</div>
-	<div class=window-modal-backbround style="display: none;"></div>
-</div>
-
 </body>
 </html>

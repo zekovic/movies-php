@@ -118,6 +118,12 @@ function format_long_number($val) {
 	
 }
 
+function get_genres() {
+	return \Model\SQL_genre::load_data();
+}
+function get_departments() {
+	return \Model\SQL_department::load_data();
+}
 
 
 
