@@ -98,6 +98,7 @@
 #search_panels input { display: inline-block; width: 60%; height: 20px; padding: 2px 10px; }
 #search_panels .input-area { display: inline-block; width: 60%; max-height: 160px; overflow: auto; padding: 2px 24px 2px 0px; }
 
+#search_warning { position: absolute; bottom: 20px; left: 20px; color: #ff5500; text-align: right; width: 55%;}
 #search_bottom_wrap { position: absolute; bottom: 20px; right: 20px; /*float: right;*/ }
 
 </style>
@@ -135,6 +136,7 @@
 				<div id=search_movies>
 					<div><label for=txt_find_title>Title:</label><input id=txt_find_title type="text" placeholder="title" /></div>
 					<div><label for=txt_find_year>Year:</label><input id=txt_find_year type="number" placeholder="year" /></div>
+					<div><label for=txt_find_keyword>Keyword:</label><input id=txt_find_keyword type="text" placeholder="keyword" /></div>
 					<div><label for=tags_find_genre>Genre:</label><span class='tag-wrap input-area' id=tags_find_genre tag=search_genre>
 						<?php 
 						$genres = get_genres();
@@ -149,7 +151,7 @@
 					<div><label for=txt_find_character>Character:</label><input id=txt_find_character type="text" placeholder="character" /></div>
 				</div>
 				<div id=search_crew>
-					<div><label for=txt_find_name>Name:</label><input id=txt_find_name type="text" placeholder="name" /></div>
+					<div><label for=txt_find_crew_name>Name:</label><input id=txt_find_crew_name type="text" placeholder="name" /></div>
 					<div><label for=txt_find_company>Company:</label><input id=txt_find_company type="text" placeholder="company" /></div>
 					<div><label for=tags_find_job>Job:</label><span class='tag-wrap input-area' id=tags_find_job tag=search_job>
 						<?php 
@@ -161,6 +163,7 @@
 					</span></div>
 				</div>
 			</div>
+			<div id=search_warning></div>
 			<div id=search_bottom_wrap>
 				<span class=btn id=btn_search>Search</span>
 				<span class='btn window-inner-btn-close' id=btn_close_search>Close</span>

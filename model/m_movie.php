@@ -64,7 +64,7 @@ class Movie extends SQL_movie
 			$where_str
 			GROUP BY m.movie_id
 			$genre_filter
-			ORDER BY m.release_date, m.movie_id
+			ORDER BY m.release_date DESC, m.movie_id
 		";
 		$SQL_parsed = DB::parse($SQL, $db_args);
 		//echo "$SQL \n\n $SQL_parsed";

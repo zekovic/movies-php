@@ -55,10 +55,15 @@ $(document).ready(function() {
 	$('.window').draggable({handle: '.window-titlebar'});
 	
 	$('#btn_find').unbind('click').bind('click', function() {
+		close_window('#frm_search');
+		find_movies();
+	});
+	$('#frm_search #btn_search').unbind('click').bind('click', function() {
 		find_movies();
 	});
 	$('#txt_find').unbind('keydown').bind('keydown', function(e) {
 		if (e.keyCode == 13) {
+			close_window('#frm_search');
 			find_movies();
 		}
 	});
@@ -100,7 +105,7 @@ function init_tabs() {
 		if ($panels.children('.selected').length) {
 			$panels.children('.selected').show();
 		} else {
-			$panels.children(':first').show().addClass('selected');
+			$panels.children(':first').show();
 			
 		}
 	});
@@ -156,7 +161,7 @@ function set_pagination_links() {
 	}
 	var url_str = location.pathname + url_str_search;
 	url_str = url_str + (url_str_search == '' ? '?page=' : '&page=');
-	
+	url_str = url_str.replace('&&page=', '&page=');
 	
 	$('.pagination a').each(function() {
 		$(this).attr('href', url_str + $(this).attr('number'));
@@ -187,8 +192,81 @@ function find_movies() {
 	if (find_str.length < 3) {
 		return;
 	}
-	var new_url = "/movie/find/?filter="+JSON.stringify({title: prepare_url_string(find_str)});
+	args = get_find_parameters();
+	if (args.error !== undefined) {
+		write_find_warning(args.error);
+		return;
+	}
+	if (!Object.keys(args.parameters).length) {
+		write_find_warning("No parameters given...");
+		return;
+	}
+	var parameters_json = JSON.stringify(args.parameters);
+	var new_url = "/"+ args.path +"/find/?filter="+parameters_json;
+	//console.log(new_url);
 	location.href = new_url;
+}
+
+function write_find_warning(str) {
+	var $el = $('#search_warning');
+	$el.html(str).show();
+	setTimeout(function() { $el.fadeOut(); }, 1000);
+}
+
+function get_find_parameters() {
+	var url_path = 'movie';
+	if ($('#frm_search').is(':hidden')) {
+		var find_str = $('#txt_find').val().trim();
+		if (find_str && find_str.length < 3) { return {error: "Title value is too short"}; }
+		return {path: url_path, parameters: {title: prepare_url_string(find_str)}};
+	} else {
+		var selected_id = $('#search_panels').children(':visible').attr('id');
+		var args = {};
+		if (selected_id == 'search_movies') {
+			url_path = 'movie';
+			var title_val = prepare_url_string($('#txt_find_title').val().trim());
+			if (title_val && title_val != '') { args.title = title_val; }
+			if (title_val && title_val.length < 3) { return {error: "Title value is too short"}; }
+			
+			var year_val = parseInt($('#txt_find_year').val().trim());
+			if (year_val) { args.year = year_val; }
+			if (year_val === NaN || year_val < 1900 || year_val > 9999) { return {error: "Wrong year format..."}; }
+			
+			var keyword_val = prepare_url_string($('#txt_find_keyword').val().trim());
+			if (keyword_val && keyword_val != '') { args.keyword = keyword_val; }
+			if (keyword_val && keyword_val.length < 2) { return {error: "Keyword value is too short"}; }
+			
+			var genres_arr = [];
+			$('#tags_find_genre').children('.selected').each(function() { genres_arr.push(parseInt($(this).attr('id'))); });
+			if (genres_arr.length) { args.genres = genres_arr; }
+		}
+		if (selected_id == 'search_actors') {
+			url_path = 'actor';
+			var actor_val = prepare_url_string($('#txt_find_actor').val().trim());
+			if (actor_val && actor_val != '') { args.actor = actor_val; }
+			if (actor_val && actor_val.length < 3) { return {error: "Actor value is too short"}; }
+			
+			var character_val = prepare_url_string($('#txt_find_character').val().trim());
+			if (character_val && character_val != '') { args.character = character_val; }
+			if (character_val && character_val.length < 3) { return {error: "Character value is too short"}; }
+		}
+		if (selected_id == 'search_crew') {
+			url_path = 'crew';
+			var crew_name_val = prepare_url_string($('#txt_find_crew_name').val().trim());
+			if (crew_name_val && crew_name_val != '') { args.crew_name = crew_name_val; }
+			if (crew_name_val && crew_name_val.length < 3) { return {error: "Name value is too short"}; }
+			
+			var company_val = prepare_url_string($('#txt_find_company').val().trim());
+			if (company_val && company_val != '') { args.company = company_val; }
+			if (company_val && company_val.length < 3) { return {error: "Company value is too short"}; }
+			
+			var jobs_arr = [];
+			$('#tags_find_job').children('.selected').each(function() { jobs_arr.push(parseInt($(this).attr('id'))); });
+			if (jobs_arr.length) { args.jobs = jobs_arr; }
+		}
+		return {path: url_path, parameters: args};
+	}
+	return {error: "No parameters given..."};
 }
 
 function select_menu_item() {
