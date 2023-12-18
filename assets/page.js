@@ -188,10 +188,6 @@ function collapse_find_txt() {
 }
 
 function find_movies() {
-	var find_str = $('#txt_find').val().trim();
-	if (find_str.length < 3) {
-		return;
-	}
 	args = get_find_parameters();
 	if (args.error !== undefined) {
 		write_find_warning(args.error);
@@ -217,7 +213,7 @@ function get_find_parameters() {
 	var url_path = 'movie';
 	if ($('#frm_search').is(':hidden')) {
 		var find_str = $('#txt_find').val().trim();
-		if (find_str && find_str.length < 3) { return {error: "Title value is too short"}; }
+		if (find_str.length < 3) { return {error: "Title value is too short"}; }
 		return {path: url_path, parameters: {title: prepare_url_string(find_str)}};
 	} else {
 		var selected_id = $('#search_panels').children(':visible').attr('id');
