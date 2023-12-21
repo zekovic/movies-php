@@ -5,7 +5,7 @@ use LibDB;
 
 class Movie extends SQL_movie
 {
-	public static $items_count;
+	public static $items_count = 0;
 	public $details;
 	//public $id;
 	
@@ -43,12 +43,24 @@ class Movie extends SQL_movie
 		$where_arr = [];
 		$db_args = [];
 		$genre_filter = "";
+		$genres_filter = "";
+		$find_keywords = false;
 		if (count($filters)) {
 			foreach ($filters as $i => $item) {
 				$item = LibDB::clear_string($item);
+				if (!$item) { continue; }
 				if ($i == 'genre') { $item = trim($item); $genre_filter = " HAVING genres LIKE %s_genre"; $db_args['genre'] = "%$item%"; }
+				//if ($i == 'genres') { $where_arr[] = "mg.genre_id IN %li_mgid"; $db_args['mgid'] = $item; }
+				if ($i == 'genres') {
+					$genre_id_arr = [];
+					foreach ($item as $j => $g_id) {
+						$genre_id_arr[] = "_".(int)$g_id."_";
+					}
+					$genres_filter = " HAVING genre_ids REGEXP '^".implode("|", $genre_id_arr)."' ";
+				}
 				if ($i == 'year') { $item = (int)$item; $where_arr[] = "release_date LIKE %s_year"; $db_args['year'] = "%$item%"; }
 				if ($i == 'title') { $where_arr[] = "title LIKE %s_title"; $db_args['title'] = "%$item%"; }
+				if ($i == 'keyword') { $find_keywords = true; $where_arr[] = "k.keyword_name LIKE %s_keyword"; $db_args['keyword'] = "%$item%"; }
 				if ($i == 'id_list') { $where_arr[] = "m.movie_id IN %li_id"; $db_args['id'] = $item; }
 			}
 		}
@@ -56,18 +68,30 @@ class Movie extends SQL_movie
 		if (count($where_arr)) {
 			$where_str = " WHERE ".implode(" AND ", $where_arr);
 		}
+		$SQL_keywords_join = "";
+		//$SQL_keywords_select = "";
+		if ($find_keywords) { // faster SQL when keyword filter not needed
+			$SQL_keywords_join = "LEFT JOIN movie_keywords mk ON mk.movie_id = m.movie_id
+									LEFT JOIN keyword k ON k.keyword_id = mk.keyword_id";
+			//$SQL_keywords_select = ", GROUP_CONCAT(DISTINCT k.keyword_name) as kwords";
+		}
+		
 		$SQL = "
-			SELECT m.movie_id, m.title, m.vote_average, m.release_date, group_concat(g.genre_name SEPARATOR', ') AS genres
+			SELECT m.movie_id, m.title, m.vote_average, m.release_date, 
+				GROUP_CONCAT(DISTINCT g.genre_name SEPARATOR', ') AS genres,
+				GROUP_CONCAT(DISTINCT CONCAT('_', g.genre_id, '_') SEPARATOR', ') AS genre_ids
 			FROM movie m
 			LEFT JOIN movie_genres mg ON mg.movie_id = m.movie_id
 			LEFT JOIN genre g ON g.genre_id = mg.genre_id
+			$SQL_keywords_join
 			$where_str
 			GROUP BY m.movie_id
-			$genre_filter
+			$genre_filter $genres_filter
 			ORDER BY m.release_date DESC, m.movie_id
 		";
 		$SQL_parsed = DB::parse($SQL, $db_args);
 		//echo "$SQL \n\n $SQL_parsed";
+		//exit;
 		$SQL_limit = $SQL_parsed;
 		if ($limit != -1) {
 			self::$items_count = CountCache::get_count($SQL_parsed);

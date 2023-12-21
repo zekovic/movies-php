@@ -72,7 +72,11 @@ class LibDB {
 	}
 	
 	static function clear_string($str) {
-		return str_ireplace(["%"], [""], $str);
+		if (!$str || is_array($str)) {
+			return $str;
+		}
+		//return trim($str);
+		return trim(str_ireplace(["%"], [""], $str));
 	}
 }
 
