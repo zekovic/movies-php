@@ -45,21 +45,19 @@ class Person extends SQL_person
 		//var_dump($filters); exit;
 		
 		$where_arr = [];
+		$having_arr = [];
 		$db_args = [];
-		$company_filter = "";
-		$jobs_filter = "";
 		if (count($filters)) {
 			foreach ($filters as $i => $item) {
 				$item = LibDB::clear_string($item);
 				if (!$item) { continue; }
-				if ($i == 'company') { $company_filter = " HAVING companies LIKE %s_company"; $db_args['company'] = "%$item%"; }
-				//if ($i == 'genres') { $where_arr[] = "mg.genre_id IN %li_mgid"; $db_args['mgid'] = $item; }
+				if ($i == 'company') { $having_arr[] = " companies LIKE %s_company"; $db_args['company'] = "%$item%"; }
 				if ($i == 'jobs') {
 					$jobs_arr = [];
 					foreach ($item as $j => $j_id) {
-						$jobs_arr[] = "_".(int)$j_id."_";
+						$jobs_arr[] = "@".(int)$j_id."@";
 					}
-					$jobs_filter = " HAVING jobs REGEXP '^".implode("|", $jobs_arr)."' ";
+					$having_arr[] = " jobs REGEXP '^".implode("|", $jobs_arr)."' ";
 				}
 				if ($i == 'crew_name') { $where_arr[] = "person_name LIKE %s_crewname"; $db_args['crewname'] = "%$item%"; }
 			}
@@ -68,11 +66,15 @@ class Person extends SQL_person
 		if (count($where_arr)) {
 			$where_str = " WHERE ".implode(" AND ", $where_arr);
 		}
+		$having_str = "";
+		if (count($having_arr)) {
+			$having_str = " HAVING ".implode(" AND ", $having_arr);
+		}
 		
 		$SQL = "
 			SELECT p.*, mcr.movie_id, m.title, m.release_date, m.vote_average, mcr.department_id, 
-				GROUP_CONCAT(DISTINCT CONCAT('_', d.department_id, '_', d.department_name, ' - ', mcr.job) SEPARATOR'\n') AS jobs,
-				GROUP_CONCAT(DISTINCT CONCAT(pc.company_id, '_', pc.company_name) SEPARATOR'\n') AS companies
+				GROUP_CONCAT(DISTINCT CONCAT('@', d.department_id, '@', d.department_name, ' - ', mcr.job) SEPARATOR'\n') AS jobs,
+				GROUP_CONCAT(DISTINCT CONCAT(pc.company_id, '@', pc.company_name) SEPARATOR'\n') AS companies
 			FROM person p
 			INNER JOIN movie_crew mcr ON p.person_id = mcr.person_id
 			LEFT JOIN movie m ON m.movie_id = mcr.movie_id
@@ -80,9 +82,9 @@ class Person extends SQL_person
 			LEFT JOIN production_company pc ON pc.company_id = mcmp.company_id
 			LEFT JOIN department d ON d.department_id = mcr.department_id
 			$where_str
-			GROUP BY CONCAT(p.person_id,'_', m.movie_id)
-			$jobs_filter
-			ORDER BY m.title, p.person_name
+			GROUP BY p.person_id, m.movie_id
+			$having_str
+			ORDER BY p.person_name, m.release_date
 		";
 		$SQL_parsed = DB::parse($SQL, $db_args);
 		//echo "$SQL \n\n $SQL_parsed";

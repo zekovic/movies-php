@@ -98,7 +98,7 @@ a:HOVER {
 
 .movie-item, .person-info > div { margin: 0px auto; padding: 10px 10px 20px 10px; width: 90%; max-width: 550px;
 	/*cursor: default;*/ border-bottom: 1px dotted #99c1c5; }
-
+.person-item-begin { margin: 0px auto; padding: 20px 5px 5px 5px; width: 90%; max-width: 550px; font-size: 18pt; font-weight: bold;  }
 
 .movie-btn-info { display: none; margin: 0px 0px 0px 2px; cursor: pointer; width: 18px; height: 18px; background-image: url(/assets/img/Information_Square.svg);
 	background-repeat: no-repeat; background-size: 18px 18px; vertical-align: bottom; }
