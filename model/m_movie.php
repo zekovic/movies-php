@@ -123,6 +123,17 @@ class Movie extends SQL_movie
 		return $result;
 	}
 	
+	public static function get_movies_count_by_genre()
+	{
+		$result = DB::query("SELECT mg.genre_id, g.genre_name, COUNT(mg.movie_id) AS movies_count
+							FROM movie_genres mg
+							LEFT JOIN genre g ON g.genre_id = mg.genre_id
+							GROUP BY genre_id
+							ORDER BY genre_name");
+		return $result ?? [];
+	}
+	
+	
 	public function get_details()
 	{
 		$this->details = [
