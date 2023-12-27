@@ -44,7 +44,7 @@ class Movie extends SQL_movie
 		$db_args = [];
 		$genre_filter = "";
 		$genres_filter = "";
-		$find_keywords = false;
+		$find_keywords = $find_language = $find_country = false;
 		if (count($filters)) {
 			foreach ($filters as $i => $item) {
 				$item = LibDB::clear_string($item);
@@ -61,6 +61,8 @@ class Movie extends SQL_movie
 				if ($i == 'year') { $item = (int)$item; $where_arr[] = "release_date LIKE %s_year"; $db_args['year'] = "%$item%"; }
 				if ($i == 'title') { $where_arr[] = "title LIKE %s_title"; $db_args['title'] = "%$item%"; }
 				if ($i == 'keyword') { $find_keywords = true; $where_arr[] = "k.keyword_name LIKE %s_keyword"; $db_args['keyword'] = "%$item%"; }
+				if ($i == 'language') { $find_language = true; $where_arr[] = "lng.language_id = %i_language"; $db_args['language'] = $item; }
+				if ($i == 'country') { $find_country = true; $where_arr[] = "cnt.country_id = %i_country"; $db_args['country'] = $item; }
 				if ($i == 'id_list') { $where_arr[] = "m.movie_id IN %li_id"; $db_args['id'] = $item; }
 			}
 		}
@@ -71,9 +73,17 @@ class Movie extends SQL_movie
 		$SQL_keywords_join = "";
 		//$SQL_keywords_select = "";
 		if ($find_keywords) { // faster SQL when keyword filter not needed
-			$SQL_keywords_join = "LEFT JOIN movie_keywords mk ON mk.movie_id = m.movie_id
+			$SQL_keywords_join .= "LEFT JOIN movie_keywords mk ON mk.movie_id = m.movie_id
 									LEFT JOIN keyword k ON k.keyword_id = mk.keyword_id";
 			//$SQL_keywords_select = ", GROUP_CONCAT(DISTINCT k.keyword_name) as kwords";
+		}
+		if ($find_language) {
+			$SQL_keywords_join .= "LEFT JOIN movie_languages mlng ON mlng.movie_id = m.movie_id
+									LEFT JOIN language lng ON lng.language_id = mlng.language_id";
+		}
+		if ($find_country) {
+			$SQL_keywords_join .= "LEFT JOIN production_country pcnt ON pcnt.movie_id = m.movie_id
+									LEFT JOIN country cnt ON cnt.country_id = pcnt.country_id";
 		}
 		
 		$SQL = "

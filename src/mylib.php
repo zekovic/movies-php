@@ -124,7 +124,12 @@ function get_genres() {
 function get_departments() {
 	return \Model\SQL_department::load_data();
 }
-
+function get_languages() {
+	return \Model\SQL_language::load_data(NULL, 'language_name');
+}
+function get_contries() {
+	return \Model\SQL_country::load_data(NULL, 'country_name');
+}
 
 
 ?>

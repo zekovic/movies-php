@@ -232,6 +232,14 @@ function get_find_parameters() {
 			if (keyword_val && keyword_val != '') { args.keyword = keyword_val; }
 			if (keyword_val && keyword_val.length < 2) { return {error: "Keyword value is too short"}; }
 			
+			var language_val = prepare_url_string($('#combo_find_language').val().trim());
+			if (language_val && language_val != '') { args.language = language_val; }
+			if (language_val && language_val.length > 2) { return {error: "Language value incorrect"}; }
+			
+			var country_val = prepare_url_string($('#combo_find_country').val().trim());
+			if (country_val && country_val != '') { args.country = country_val; }
+			if (country_val && country_val.length > 2) { return {error: "Country value incorrect"}; }
+			
 			var genres_arr = [];
 			$('#tags_find_genre').children('.selected').each(function() { genres_arr.push(parseInt($(this).attr('id'))); });
 			if (genres_arr.length) { args.genres = genres_arr; }

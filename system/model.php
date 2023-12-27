@@ -80,15 +80,20 @@ class Table
 		}
 	}
 	
-	public static function load_data($limit = NULL)
+	public static function load_data($limit = NULL, $order = NULL)
 	{
 		$limit_str = "";
 		if ($limit) {
 			$limit_str = " LIMIT ".(int)$limit." ";
 			
 		}
+		$order_str = "";
+		if ($order) {
+			$order_str = " ORDER BY $order ";
+			
+		}
 		$name = static::$db_name;
-		$result = DB::query("SELECT * FROM $name $limit_str");
+		$result = DB::query("SELECT * FROM $name $order_str $limit_str");
 		//echo DB::lastQuery(); // get SQL query
 		return $result;
 	}

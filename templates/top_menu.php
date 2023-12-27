@@ -91,11 +91,12 @@
 	cursor: pointer;
 }
 
-#frm_search { display: none; border-radius: 0px 0px 6px 6px; width: 500px; height: 350px; max-width: 80%; max-height: 60%; }
+#frm_search { display: none; border-radius: 0px 0px 6px 6px; width: 500px; height: 395px; max-width: 80%; max-height: 60%; }
 #search_panels { margin: 25px 0px 25px 0px; }
 #search_panels > div > div { margin: 5px 0px 5px 0px; }
 #search_panels label { display: inline-block; margin: 5px 10px 0px 0px; vertical-align: top; width: 20%; text-align: right; }
 #search_panels input { display: inline-block; width: 60%; height: 20px; padding: 2px 10px; }
+#search_panels select { display: inline-block; width: 18%; height: 25px; padding: 2px 10px; margin: 0px 0px 0px -5px; }
 #search_panels .input-area { display: inline-block; width: 60%; max-height: 160px; overflow: auto; padding: 2px 24px 2px 0px; }
 
 #search_warning { position: absolute; bottom: 20px; left: 20px; color: #ff5500; text-align: right; width: 55%;}
@@ -137,6 +138,22 @@
 					<div><label for=txt_find_title>Title:</label><input id=txt_find_title type="text" placeholder="title" /></div>
 					<div><label for=txt_find_year>Year:</label><input id=txt_find_year type="number" placeholder="year" /></div>
 					<div><label for=txt_find_keyword>Keyword:</label><input id=txt_find_keyword type="text" placeholder="keyword" /></div>
+					<div>
+						<?php 
+						$languages = get_languages();
+						$countries = get_contries();
+						?>
+						<label for=combo_find_language>Language:</label>
+						<select id=combo_find_language>
+							<option value="">---</option>
+							<?php foreach ($languages as $i => $item) { echo "<option value='{$item['language_code']}'>{$item['language_name']}</option>"; }  ?>
+						</select>
+						<label for=combo_find_country>Country:</label>
+						<select id=combo_find_country>
+							<option value="">---</option>
+							<?php foreach ($countries as $i => $item) { echo "<option value='{$item['country_iso_code']}'>{$item['country_name']}</option>"; }  ?>
+						</select>
+					</div>
 					<div><label for=tags_find_genre>Genre:</label><span class='tag-wrap input-area' id=tags_find_genre tag=search_genre>
 						<?php 
 						$genres = get_genres();

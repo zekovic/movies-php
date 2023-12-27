@@ -67,14 +67,32 @@ class MovieController extends Controller
 		//var_dump($find_arr); //exit;
 		
 		$valid_args = true;
-		$title = $keyword = $year = null;
+		$title = $keyword = $year = $language = $country = null;
 		$genres = [];
 		if (isset($find_arr['title'])) { $title = LibDB::clear_string($find_arr['title']); }
 		if (isset($find_arr['year'])) { $year = (int)($find_arr['year']); }
 		if (isset($find_arr['keyword'])) { $keyword = LibDB::clear_string($find_arr['keyword']); }
 		if (isset($find_arr['genres'])) { foreach ($find_arr['genres'] as $i => $item) { if ((int)$item) { $genres[] = (int)$item; } } }
+		if (isset($find_arr['language'])) {
+			$languages = get_languages();
+			$language_code = LibDB::clear_string($find_arr['language']);
+			foreach ($languages as $i => $item) {
+				if ($language_code == $item['language_code']) {
+					$language = (int)($item['language_id']);
+				}
+			}
+		}
+		if (isset($find_arr['country'])) {
+			$countries = get_contries();
+			$country_code = LibDB::clear_string($find_arr['country']);
+			foreach ($countries as $i => $item) {
+				if ($country_code == $item['country_iso_code']) {
+					$country = (int)($item['country_id']);
+				}
+			}
+		}
 		
-		if (!$title && !$keyword && !$year && count($genres) == 0) { $valid_args = false; }
+		if (!$title && !$keyword && !$year && !$language && !$country && count($genres) == 0) { $valid_args = false; }
 		if ($title && mb_strlen($title) < 3) { $valid_args = false; }
 		if ($year && $year < 1900 || $year > 9999) { $valid_args = false; }
 		if ($keyword && mb_strlen($keyword < 2)) { $valid_args = false; }
@@ -83,7 +101,7 @@ class MovieController extends Controller
 			Info::$result = ['list' => [], 'total' => 0];
 			//return;
 		} else {
-			$filter = ['title' => $title, 'year' => $year, 'keyword' => $keyword, 'genres' => $genres];
+			$filter = ['title' => $title, 'year' => $year, 'keyword' => $keyword, 'language' => $language, 'country' => $country, 'genres' => $genres];
 			Info::$result = ['list' => Model\Movie::get_movie_list(null, 0, $filter), 'total' => Model\Movie::$items_count];
 		}
 		
