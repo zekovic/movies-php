@@ -50,14 +50,14 @@ class Movie extends SQL_movie
 			foreach ($filters as $i => $item) {
 				$item = LibDB::clear_string($item);
 				if (!$item) { continue; }
-				if ($i == 'genre') { $item = trim($item); $genre_filter = " HAVING genres LIKE %s_genre"; $db_args['genre'] = "%$item%"; }
-				//if ($i == 'genres') { $where_arr[] = "mg.genre_id IN %li_mgid"; $db_args['mgid'] = $item; }
+				if ($i == 'genre') {
+					$item = trim($item);
+					$genre_filter = " HAVING genres LIKE %s_genre";
+					$db_args['genre'] = "%$item%";
+				}
 				if ($i == 'genres') {
-					$genre_id_arr = [];
-					foreach ($item as $j => $g_id) {
-						$genre_id_arr[] = "_".(int)$g_id."_";
-					}
-					$genres_filter = " HAVING genre_ids REGEXP '^".implode("|", $genre_id_arr)."' ";
+					$where_arr[] = "g.genre_id IN %li_genreids";
+					$db_args['genreids'] = $item;
 				}
 				if ($i == 'year') {
 					$item = (int)$item; $where_arr[] = "release_date LIKE %s_year";
