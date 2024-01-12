@@ -1,7 +1,7 @@
 <?php 
 
 print_site();
-print_title("Genres");
+print_title("Select genre to explore");
 ?>
 <div class=genres-wrap>
 <?php
@@ -18,6 +18,8 @@ if (Info::$result) {
 }
 } ?>
 </div>
+
+<?php LibHtml::print_part('footer'); ?>
 
 </body>
 </html>

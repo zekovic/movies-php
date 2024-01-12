@@ -2,7 +2,7 @@
 
 class GlobVars {
 	static $site_name = "Movies";
-	static $home_page = "home";
+	static $home_page = "genre";
 	static $pagination_size = 30;
 	
 	static $db_user = "new_user";

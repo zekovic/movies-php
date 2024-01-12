@@ -105,11 +105,8 @@
 </style>
 
 <div id=top_menu>
-	<a href="/"><span >Home</span></a>
 	<a href="/movie"><span>Movies</span></a>
 	<a href="/genre"><span>Genres</span></a>
-	<a><span>Actors</span></a>
-	<a><span>Crew</span></a>
 	<a><span>Companies</span></a>
 	<span id=find_wrap>
 	</span>
@@ -120,7 +117,6 @@
 		</span>
 	<span id=btn_find></span>
 	<a><span>User</span></a>
-	<a><span>Settings</span></a>
 </div>
 
 
