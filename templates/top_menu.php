@@ -91,7 +91,7 @@
 	cursor: pointer;
 }
 
-#frm_search { display: none; border-radius: 0px 0px 6px 6px; width: 500px; height: 395px; max-width: 80%; max-height: 60%; }
+#frm_search { display: none; border-radius: 0px 0px 6px 6px; width: 500px; height: 395px; max-width: 90%; max-height: 90%; }
 #search_panels { margin: 25px 0px 25px 0px; }
 #search_panels > div > div { margin: 5px 0px 5px 0px; }
 #search_panels label { display: inline-block; margin: 5px 10px 0px 0px; vertical-align: top; width: 20%; text-align: right; }
