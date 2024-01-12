@@ -93,7 +93,11 @@ $year = $movie->release_date ? substr($movie->release_date, 0, 4) : "";
 		<div class="tab" id=movie_overview>
 			<div>
 				<span class=movie-info-language>
-					<?php foreach ($data['country'] as $i => $item) { echo $item['country_iso_code']." "; } ?> / 
+					<?php foreach ($data['country'] as $i => $item) {
+						$iso = $item['country_iso_code'];
+						$iso_lower = strtolower($iso);
+						echo "<span class=movie-info-country-img style='background-image: url(/assets/img/flags/{$iso_lower}.svg)'>$iso</span>";
+					} ?> / 
 					<?= implode(", ", $lang_arr) ?>
 				</span>
 				<span class=movie-info-duration>Duration: <?php echo LibTime::hours_to_hh_mm($movie->runtime); ?></span>
