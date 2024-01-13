@@ -96,6 +96,7 @@ a:HOVER {
 
 .list-wrap {  }
 
+.genres-wrap a { margin: 0px 20px 10px 0px; display: inline-block; }
 .genres-wrap,
 .movie-item, .person-info > div { margin: 0px auto; padding: 10px 10px 20px 10px; width: 90%; max-width: 550px;
 	/*cursor: default;*/ border-bottom: 1px dotted #99c1c5; }
