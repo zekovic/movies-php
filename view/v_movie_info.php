@@ -121,7 +121,8 @@ $year = $movie->release_date ? substr($movie->release_date, 0, 4) : "";
 		<?php
 			echo " - ";
 			foreach ($data['keywords'] as $i => $item) {
-				echo "<span>{$item['keyword_name']}</span> - ";
+				$keyword_url = LibHtml::string_for_url($item['keyword_name']);
+				echo "<span><a href='/movie/keyword/$keyword_url'>{$item['keyword_name']}</a></span> - ";
 			}
 		?>
 		</div>

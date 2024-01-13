@@ -54,9 +54,21 @@ class MovieController extends Controller
 			return;
 		}
 		$year = (int)$year;
-		//self::print("Movies of $year genre...");
 		Info::$result = ['list' => Model\Movie::get_movie_list(null, 0, ['year' => $year]), 'total' => Model\Movie::$items_count];
 		Info::$page_title = "Movies from $year (total ".Model\Movie::$items_count." items)";
+		self::show();
+	}
+	
+	public static function keyword()
+	{
+		$keyword = isset(Info::$controller_suboption) ? Info::$controller_suboption : null;
+		if (!$keyword) {
+			Info::$result = null;
+			return;
+		}
+		$keyword =LibDB::clear_string(LibHtml::url_to_string($keyword));
+		Info::$result = ['list' => Model\Movie::get_movie_list(null, 0, ['keyword' => $keyword]), 'total' => Model\Movie::$items_count];
+		Info::$page_title = "Movies with '$keyword' (total ".Model\Movie::$items_count." items)";
 		self::show();
 	}
 	
