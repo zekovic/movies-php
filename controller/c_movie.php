@@ -59,7 +59,7 @@ class MovieController extends Controller
 		$year = (int)$year;
 		Info::$result = ['list' => Model\Movie::get_movie_list(null, 0, ['year' => $year]), 'total' => Model\Movie::$items_count];
 		Info::$page_title = "Movies from $year (total ".Model\Movie::$items_count." items)";
-		Info::$site_title = "$year movies";
+		Info::$site_title = "$year. movies";
 		self::show();
 	}
 	
