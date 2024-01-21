@@ -16,6 +16,7 @@ class MovieController extends Controller
 		$page = Info::$controller_suboption;
 		Info::$result = ['list' => Model\Movie::get_movie_list(null, $page), 'total' => Model\Movie::$items_count];
 		Info::$page_title = "Movies (total ".Model\Movie::$items_count." items)";
+		Info::$site_title = "Movies [$page]";
 		self::show();
 	}
 	
@@ -27,6 +28,7 @@ class MovieController extends Controller
 		$found->get_details();
 		Info::$result = $found;
 		Info::$page_title = "About {$found->title}";
+		Info::$site_title = $found->title;
 		self::show('movie_info');
 		
 	}
@@ -42,6 +44,7 @@ class MovieController extends Controller
 		//self::print("Movies of $genre genre...");
 		Info::$result = ['list' => Model\Movie::get_movie_list(null, 0, ['genre' => $genre]), 'total' => Model\Movie::$items_count];
 		Info::$page_title = "Movies of $genre genre (total ".Model\Movie::$items_count." items)";
+		Info::$site_title = "$genre movies";
 		self::show();
 		//self::show('movie');
 	}
@@ -56,6 +59,7 @@ class MovieController extends Controller
 		$year = (int)$year;
 		Info::$result = ['list' => Model\Movie::get_movie_list(null, 0, ['year' => $year]), 'total' => Model\Movie::$items_count];
 		Info::$page_title = "Movies from $year (total ".Model\Movie::$items_count." items)";
+		Info::$site_title = "$year movies";
 		self::show();
 	}
 	
@@ -69,6 +73,7 @@ class MovieController extends Controller
 		$keyword =LibDB::clear_string(LibHtml::url_to_string($keyword));
 		Info::$result = ['list' => Model\Movie::get_movie_list(null, 0, ['keyword' => $keyword]), 'total' => Model\Movie::$items_count];
 		Info::$page_title = "Movies with '$keyword' (total ".Model\Movie::$items_count." items)";
+		Info::$site_title = "$keyword keyword";
 		self::show();
 	}
 	
@@ -118,6 +123,7 @@ class MovieController extends Controller
 		}
 		
 		Info::$page_title = "Found movies (total ".Model\Movie::$items_count." items)";
+		Info::$site_title = "Found movies";
 		self::show();
 	}
 	

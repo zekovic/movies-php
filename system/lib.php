@@ -90,7 +90,8 @@ class Info {
 	public static $controller_suboption = false;
 	public static $result;
 	public static $page_title = "";
+	public static $site_title = "";
 	public static $page_number = 1;
 }
 
-
+Info::$site_title = GlobVars::$site_name;

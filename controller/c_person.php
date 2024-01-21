@@ -27,6 +27,7 @@ class PersonController extends Controller
 			if (Info::$original_route == 'actor') {
 				Info::$page_title = "Info about actor: $person->person_name";
 			}
+			Info::$site_title = $person->person_name;
 		}
 		
 		Info::$result['movie_list'] = [];
@@ -61,6 +62,7 @@ class PersonController extends Controller
 				$filter = ['actor' => $actor, 'character' => $character];
 				Info::$result = ['list' => Model\Person::get_actor_list(null, 0, $filter), 'total' => Model\Person::$items_count];
 			}
+			Info::$site_title = "Found actors";
 		}
 		
 		if (Info::$original_route == 'crew') {
@@ -78,6 +80,7 @@ class PersonController extends Controller
 				$filter = ['crew_name' => $crew_name, 'company' => $company, 'jobs' => $jobs];
 				Info::$result = ['list' => Model\Person::get_crew_list(null, 0, $filter), 'total' => Model\Person::$items_count];
 			}
+			Info::$site_title = "Found crew";
 		}
 		
 		if (!$valid_args) {
