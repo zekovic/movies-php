@@ -96,10 +96,12 @@ a:HOVER {
 
 .list-wrap {  }
 
-.genres-wrap a { margin: 0px 20px 10px 0px; display: inline-block; }
+.genres-wrap a { margin: 5px 5px 0px 0px; display: inline-block; }
 .genres-wrap,
 .movie-item, .person-info > div { margin: 0px auto; padding: 10px 10px 20px 10px; width: 90%; max-width: 550px;
 	/*cursor: default;*/ border-bottom: 1px dotted #99c1c5; }
+.genre-random-movies-wrap { margin: 0px 0px 10px 0px; }
+.genre-random-movies-wrap > span { margin: 0px 5px 0px 0px; font-size: 12px; }
 .person-item-begin { margin: 0px auto; padding: 20px 5px 5px 5px; width: 90%; max-width: 550px; font-size: 18pt; font-weight: bold;  }
 
 .movie-btn-info { display: none; margin: 0px 0px 0px 2px; cursor: pointer; width: 18px; height: 18px; background-image: url(/assets/img/Information_Square.svg);

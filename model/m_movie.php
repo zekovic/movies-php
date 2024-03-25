@@ -133,6 +133,49 @@ class Movie extends SQL_movie
 		return $result ?? [];
 	}
 	
+	public static function get_random_movies_by_genres()
+	{
+		$random_arr = ["00", "00", "00"];
+		foreach ($random_arr as $i => $item) {
+			$random_arr[$i] = bin2hex(random_bytes(1));
+		}
+		
+		$result = DB::query("SELECT MD5(mg.movie_id * mg.genre_id) as hash, g.genre_id, g.genre_name, COUNT(m.movie_id),
+									GROUP_CONCAT(m.title SEPARATOR'\n') AS movie_titles,
+									GROUP_CONCAT(m.movie_id SEPARATOR' ') AS movie_ids,
+									GROUP_CONCAT(m.release_date SEPARATOR' ') AS movie_dates,
+									GROUP_CONCAT(m.vote_average SEPARATOR' ') AS movie_ratings
+								FROM movie_genres mg
+								LEFT JOIN genre g ON g.genre_id = mg.genre_id
+								LEFT JOIN movie m ON m.movie_id = mg.movie_id
+								WHERE MD5(mg.movie_id * mg.genre_id) LIKE '%{$random_arr[0]}%'
+									OR MD5(mg.movie_id * mg.genre_id) LIKE '%{$random_arr[1]}%'
+									OR MD5(mg.movie_id * mg.genre_id) LIKE '%{$random_arr[2]}%'
+								GROUP BY mg.genre_id");
+		if (!$result) {
+			return [];
+		}
+		$genre_arr = array();
+		foreach ($result as $i => $row) {
+			$titles = explode("\n", $row['movie_titles']);
+			$ids = explode(" ", $row['movie_ids']);
+			$dates = explode(" ", $row['movie_dates']);
+			$ratings = explode(" ", $row['movie_ratings']);
+			$genre_arr[$row['genre_id']] = array();
+			foreach ($titles as $j => $title) {
+				if ($j > 10) break;
+				$genre_arr[$row['genre_id']][] = array(
+					'id' => $ids[$j],
+					'title' => $titles[$j],
+					'date' => $dates[$j],
+					'rating' => $ratings[$j]
+				);
+			}
+		}
+		
+		return $genre_arr;
+	}
+	
 	
 	public function get_details()
 	{
