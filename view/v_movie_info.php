@@ -67,6 +67,12 @@ foreach ($crew_arr as $i => $department) {
 
 $year = $movie->release_date ? substr($movie->release_date, 0, 4) : "";
 
+$budget_width = 0; $revenue_width = 0;
+if ($movie->budget > 0 && $movie->revenue > 0) {
+	$budget_revenue_total = $movie->budget + $movie->revenue;
+	$budget_width = $movie->budget / $budget_revenue_total * 200;
+	$revenue_width = $movie->revenue / $budget_revenue_total * 200;
+}
 ?>
 <h2><?= print_title(Info::$page_title); ?></h2>
 
@@ -104,8 +110,16 @@ $year = $movie->release_date ? substr($movie->release_date, 0, 4) : "";
 			</div>
 			<div class=movie-info-company><?= implode(", ", $company_arr) ?></div>
 			<div class=movie-info-url><?= $movie->homepage ? "<a target=_blank href='$movie->homepage'>$movie->homepage</a>" : '' ?></div>
-			<div class=movie-info-budget>Budget: <span><?= $movie->budget ? "$".format_long_number($movie->budget) : '' ?></span></div>
-			<div class=movie-info-revenue>Revenue: <span><?= $movie->revenue ? "$".format_long_number($movie->revenue) : '' ?></span></div>
+			<div class=movie-info-budget>
+				Budget: <span><?= $movie->budget ? "$".format_long_number($movie->budget) : '' ?><br/>
+					<span class="movie-info-budget-bar" style="width: <?= $budget_width ?>px;"></span>
+				</span>
+			</div>
+			<div class=movie-info-revenue>
+				Revenue: <span><?= $movie->revenue ? "$".format_long_number($movie->revenue) : '' ?><br/>
+					<span class="movie-info-revenue-bar" style="width: <?= $revenue_width ?>px;"></span>
+				</span>
+			</div>
 			<div><?= $crew_summary ?></div>
 			<div><?= $cast_summary ?></div>
 		</div>

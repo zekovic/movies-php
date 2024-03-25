@@ -129,8 +129,11 @@ a:HOVER {
 .movie-info-country-img:last-child { margin: 0px; }
 .movie-info-duration { float: right; }
 .movie-info-url {  }
-.movie-info-budget, .movie-info-revenue { width: 200px; }
-.movie-info-budget > span, .movie-info-revenue > span { float: right; width: 100px; }
+.movie-info-budget, .movie-info-revenue { width: 300px; }
+.movie-info-budget > span, .movie-info-revenue > span { float: right; width: 200px; }
+.movie-info-budget-bar, .movie-info-revenue-bar { margin: 0px 0px 12px 0px; height: 3px; display: inline-block; }
+.movie-info-budget-bar { background: #dd3333; width: 0px; }
+.movie-info-revenue-bar { background: #33dd33; width: 0px; }
 /*
 .movie-info-cast > span:nth-child(odd) { background-color: #4D4D4D; }
 .movie-info-cast > span:nth-child(even) { background-color: #CCC; }
