@@ -14,7 +14,8 @@
 	});
 </script>
 <style>
-	#footer_about { display: block; width: 90%; max-width: 700px; margin: 0px auto; line-height: 35px; }
+	#footer_about { display: block; width: 95%; max-width: 550px; margin: 0px auto; line-height: 35px; }
 	#footer_about a span { display: inline-block; width: 24px; height: 24px; background-repeat: no-repeat; vertical-align: middle; }
 	#to_top { cursor: pointer; float: right; }
+	#footer hr { border-color: #6ccee770 }
 </style>
