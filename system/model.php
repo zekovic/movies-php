@@ -71,6 +71,9 @@ class Table
 		if ($column["Type"] == "int") {
 			$value = (int)$value;
 		}
+		if ($column["Type"] == "bigint") {
+			$value = (int)$value;
+		}
 		if ($column["Type"] == "float") {
 			$value = (double)$value;
 		}
