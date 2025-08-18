@@ -288,14 +288,7 @@ function get_movie_details(id) {
 		if (is_success != 'success') {
 			return;
 		}
-		//console.log(JSON.parse(data));
-		var data_json = JSON.parse(data);
-		result = 'Movie details: </br>';
-		for (i in data_json) {
-			result += (i+": <b>" + data_json[i] + '</b><br/>');
-		}
-		
-		$('#wnd_movie .window-content').html(result);
+		$('#wnd_movie .window-content').html(data);
 	});
 }
 

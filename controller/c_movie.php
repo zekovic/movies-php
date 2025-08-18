@@ -139,10 +139,13 @@ class MovieController extends Controller
 			Info::$result = null;
 			return;
 		}
-		//$found = new Model\SQL_movie((int)$id);
-		//Info::$result = $found->data();
-		Info::$result = Model\SQL_movie::get($id);
-		self::return_json();
+		
+		$found = new \Model\Movie($id);
+		$found->get_details();
+		Info::$result = $found;
+		Info::$page_title = "About {$found->title}";
+		Info::$site_title = $found->title;
+		self::show('movie_details');
 	}
 	
 }
