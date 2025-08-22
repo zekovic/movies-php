@@ -23,27 +23,11 @@ if ($movies_count > 1) { $count_label.= "s"; }
 <?php
 
 foreach ($movie_list as $i => $item) { 
-	$genres_arr = $item['genres'] ? explode(",", $item['genres']) : [];
-	$genres_url_arr = [];
-	foreach ($genres_arr as $j => $genre_name) {
-		$genre_name = trim($genre_name);
-		$genres_url_arr[] = "<a href='/movie/genre/$genre_name'>$genre_name</a>";
-	}
-	$year = $item['release_date'] ? substr($item['release_date'], 0, 4) : "";
 	
 	$characters = explode("/", $person->actor_movies[$item['movie_id']]['character_name']);
 	?>
 	<div class=movie-item id=<?= $item['movie_id'] ?>>
-		<span class=movie-title>
-			<a href="/movie/<?= $item['movie_id'] ?>"><?= $item['title'] ?></a>
-			<span class='movie-btn-hover movie-btn-info'></span>
-			<span class='movie-btn-hover movie-btn-google'></span>
-		</span>
-		<span class=movie-genres><?= implode(" ", $genres_url_arr) ?>&nbsp;</span>
-		<span class=movie-date-rating>
-			<span class=movie-rating><?= "{$item['vote_average']}" ?></span>
-			<span class=movie-date><a href="/movie/year/<?= $year ?>"><?= $item['release_date'] ?></a></span>
-		</span>
+		<?php include GlobVars::$root_folder."/templates/movie_item.php"; ?>
 		<div class=movie-actor-cast>
 			<?php
 			foreach ($characters as $j => $character) {
