@@ -41,6 +41,13 @@ $(document).ready(function() {
 		open_window('#wnd_movie', null, $movie.find('.movie-title').text(), get_movie_details(id));
 		
 	});
+	$('.movie-btn-google').unbind('click').bind('click', function() {
+		var $movie = $(this).closest('.movie-item');
+		var id = $movie.attr('id');
+		var title = $movie.find('.movie-title').text();
+		var google_url = "https://www.google.com/search?q=" + title.replaceAll(" ", "+") + "+movie";
+		window.open(google_url, "_blank");
+	});
 	
 	$('.window-btn-close, .window-inner-btn-close').unbind('click').bind('click', function() {
 		//$('.window-modal-backbround').hide();

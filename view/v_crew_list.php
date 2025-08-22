@@ -48,7 +48,8 @@ if (Info::$result && Info::$result['list']) {
 		<div class=movie-item id=<?= $item['movie_id'] ?>>
 			<span class=movie-title>
 				<a href="/movie/<?= $item['movie_id'] ?>"><?= $item['title'] ?></a>
-				<span class=movie-btn-info></span>
+				<span class='movie-btn-hover movie-btn-info'></span>
+				<span class='movie-btn-hover movie-btn-google'></span>
 			</span>
 			<div class=crew-name><?= /*"<b>".$item['person_name']."</b> as:<br/> ".*/$jobs_str ?></div><br/>
 			<div class=movie-info-company>

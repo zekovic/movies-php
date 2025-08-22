@@ -21,7 +21,8 @@ if (Info::$result && Info::$result['list']) {
 		<div class=movie-item id=<?= $item['movie_id'] ?>>
 			<span class=movie-title>
 				<a href="/movie/<?= $item['movie_id'] ?>"><?= $item['title'] ?></a>
-				<span class=movie-btn-info></span>
+				<span class='movie-btn-hover movie-btn-info'></span>
+				<span class='movie-btn-hover movie-btn-google'></span>
 			</span>
 			<span class=movie-genres><?= implode(" ", $genres_url_arr) ?>&nbsp;</span>
 			<span class=movie-date-rating>
