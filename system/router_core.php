@@ -50,7 +50,8 @@ class Router {
 			if (count(Info::$request['path']) > 1) {
 				Info::$controller_option = Info::$request['path'][1];
 			}
-			if (is_numeric(Info::$controller_option)) {
+			$option_arr = explode("-", Info::$controller_option);
+			if (is_numeric($option_arr[0])) {
 				Info::$controller_suboption = (int)Info::$controller_option;
 				Info::$controller_option = 'id';
 			}

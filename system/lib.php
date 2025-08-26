@@ -36,6 +36,9 @@ class LibHtml {
 	public static function string_to_permalink($str) {
 		return urlencode(str_replace(" ", "-", mb_strtolower($str)));
 	}
+	public static function permalink_to_string($str) {
+		return urldecode(str_replace("-", " ", mb_strtolower($str)));
+	}
 }
 
 

@@ -8,12 +8,12 @@ use Model\Person;
 class PersonController extends Controller
 {
 	public static function index() {
-		$person_arr = explode("-", Info::$controller_option);
-		if (count($person_arr) > 0 && is_numeric($person_arr[0])) {
+		$person_arr = explode("-", Info::$controller_suboption);
+		if (is_numeric($person_arr[0])) {
 			$person_id = (int)($person_arr[0]);
 			$person = new Person($person_id);
 		} else {
-			$name = LibHtml::url_to_string(Info::$controller_option);
+			$name = LibHtml::permalink_to_string(Info::$controller_option);
 			$person = Person::get_by_name($name);
 		}
 		Info::$result = ['person_type' => Info::$original_route];
