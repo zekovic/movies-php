@@ -25,7 +25,7 @@ if (Info::$result && Info::$result['list']) {
 		<div class=movie-item id=<?= $item['company_id'] ?>>
 			<span class=movie-title>
 				<a href="<?= $href ?>"><?= $item['company_name'] ?></a>
-				<span class='movie-btn-hover movie-btn-info'></span>
+				<!-- <span class='movie-btn-hover movie-btn-info'></span> -->
 			</span>
 			<span class=movie-genres><?= $item['genres_list'] ?>&nbsp;</span>
 		</div>
