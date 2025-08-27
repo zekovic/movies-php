@@ -107,7 +107,7 @@
 <div id=top_menu>
 	<a href="/movie"><span>Movies</span></a>
 	<a href="/genre"><span>Genres</span></a>
-	<a href="/company"><span>Companies</span></a>
+	<a href="/companies"><span>Companies</span></a>
 	<span id=find_wrap>
 	</span>
 		<input id=txt_find type="text" placeholder="search" value="<?= get_find_filter('title') ?>"/>

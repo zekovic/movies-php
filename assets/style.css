@@ -149,13 +149,47 @@ a:HOVER {
 .movie-info-keywords > div { text-align: center; margin: 20px 20px; font-size: 11pt; }
 .movie-info-keywords span { white-space: nowrap; }
 
+.profit { font-weight: bold; }
+/*.profit-hidden { display: none; }*/
+.profit-equal { color: #deeb11; }
+.profit-up { color: #2b8f2b; }
+.profit-down { color: #dd3333; }
+#company_profit_graph { display: flex; align-items: flex-end; overflow-x: auto; overflow-y: hidden; padding: 0px 0px 20px 0px; }
+.profit-bar {
+	display: inline-block;
+/*	vertical-align: bottom;*/
+	min-width: 5px;
+/*	max-width: 24px;*/
+	border: 1px solid #555;
+	color: #bbb;
+}
+.profit-bar-budget { background-color: #dd3333; margin: 0px -3px 0px 5px; z-index: 5; }
+.profit-bar-revenue { background-color: #2b8f2b; }
+.profit-bar-space { height: 97%; /*width: 15px;*/ min-width: 15px; border: 0px; }
+.bar-text {
+	font-size: 10px;
+	border-radius: 3px;
+	background-color: #333a;
+	color: #ccc;
+	display: inline-block;
+	padding: 2px 5px;
+	text-align: center;
+/*	margin: -5px 0px 0px 0px;*/
+}
+
 .tag-item { display: inline-block; padding: 1px 5px; margin: 5px 5px 0px 0px; cursor: pointer;
 	border: 1px solid #5b656d; border-radius: 7px; font-size: 15px; text-transform: lowercase;  }
 .tag-item:HOVER { background-color: #4342; }
 .tag-item.selected { background-color: #7bb5e3; }
 .marked-tag { font-weight: bold; }
 
-.tab-wrap { font-size: 0px; border-bottom: 0px !important; }
+.tab-wrap {
+	font-size: 0px;
+	border-bottom: 0px !important;
+	position: sticky;
+	top: 30px;
+	background-color: #cdf8fedd;
+}
 .tab-wrap > span {
 	cursor: pointer;
 	padding: 5px 5%;

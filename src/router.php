@@ -5,4 +5,5 @@ Router::$routes = [
 	"assets" => "home",
 	"crew" => "person",
 	"actor" => "person",
+	"companies" => "company",
 ];
