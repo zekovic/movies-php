@@ -37,8 +37,7 @@ if (Info::$result && Info::$result['list']) {
 		foreach ($companies_arr as $j => $company) {
 			$company_arr = explode("@", $company);
 			if (count($company_arr) > 1) {
-				$href_company = LibHtml::string_for_url("{$company_arr[0]}-{$company_arr[1]}");
-				//$href_company = LibHtml::string_for_url($company_arr[1]);
+				$href_company = LibHtml::string_to_permalink("{$company_arr[0]}-{$company_arr[1]}");
 				$companies_arr[$j] = "<a href=/company/$href_company>{$company_arr[1]}</a>";
 			}
 		}

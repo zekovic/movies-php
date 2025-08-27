@@ -16,8 +16,8 @@ $lang_arr = array_unique($lang_arr);
 
 $company_arr = [];
 foreach ($data['company'] as $i => $item) {
-	$href_company = LibHtml::string_for_url($item['company_name']);
-	$company_arr[] = "<a href=/company/$href_company>{$item['company_name']}</a>";
+	$href_company = LibHtml::string_to_permalink($item['company_name']);
+	$company_arr[] = "<a href=/company/{$item['company_id']}-$href_company>{$item['company_name']}</a>";
 }
 
 
