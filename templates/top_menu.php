@@ -1,6 +1,30 @@
 
 <style type="text/css">
 
+@media screen and (max-width: 768px) {
+	
+	#top_menu {
+		min-width: 0px !important;
+		margin: -2px 0px 0px 0px;
+		padding: 0px 0px 2px 0px;
+	}
+	#top_menu > a {
+		padding-left: 0px !important;
+		padding-right: 5px !important;
+	}
+	#top_menu span {
+		font-size: 9pt !important;
+	}
+	#top_menu #txt_find {
+		max-width: 110px !important;
+		font-size: 9pt !important;
+	}
+
+	#wrap_txt_btn_find > span {
+		margin-bottom: -8px !important;
+	}
+	
+}
 
 #top_menu {
 	position: fixed;
