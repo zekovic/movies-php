@@ -73,9 +73,10 @@ if ($movie->budget > 0 && $movie->revenue > 0) {
 	$budget_width = $movie->budget / $budget_revenue_total * 200;
 	$revenue_width = $movie->revenue / $budget_revenue_total * 200;
 }
-?>
-<h2><?= print_title(Info::$page_title); ?></h2>
 
+print_title(Info::$page_title);
+
+?>
 
 <div class=movie-info>
 	<div>

@@ -7,17 +7,24 @@
 	z-index: 10000;
 	font-size: 0px;
 	top: 0px;
-	left: 0px;
+/*	left: 0px;*/
+/*	right: 0px;*/
 	cursor: default;
 	/*
 	padding: 7px 0px;
 	margin: 5px;
 	float: right;
 	*/
-	text-align: right;
+/*	text-align: right;*/
+	text-align: center;
 	width: 100%;
-	background-color: #0269c1;
+	min-width: 550px;
+/*	max-height: 34px;*/
+	background-color: #0269c1d9;
 	/*border-radius: 5px;*/
+}
+#top_menu > * {
+	white-space: nowrap;
 }
 #top_menu * { font-size: 11pt; }
 
@@ -28,13 +35,9 @@
 	
 	margin: 0px 0px 0px 0px;
 	color: #bfcbef;
-	
-	background: rgb(14,14,112);
-	background: linear-gradient(0deg, rgba(14,14,112,1) 20%, rgba(44,107,218,1) 87%);
 }
-#top_menu > a:HOVER {
-	background: rgb(14,14,54);
-	background: linear-gradient(0deg, rgba(14,14,54,1) 20%, rgba(23,70,154,1) 87%);
+#top_menu > a:HOVER, #top_menu .top-btn:HOVER {
+	opacity: 0.5;
 }
 
 #top_menu > a.separator {
@@ -91,6 +94,16 @@
 	cursor: pointer;
 }
 
+#top_menu #home_link {
+	background: 0px 0px no-repeat url(/assets/img/door-home-home-page-homepage-house-svgrepo-com.svg);
+	width: 30px;
+	height: 23px;
+	display: inline-block;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px -5px 0px;
+	background-size: 24px 24px;
+}
+
 #frm_search { display: none; border-radius: 0px 0px 6px 6px; width: 500px; height: 395px; max-width: 90%; max-height: 90%; }
 #search_panels { margin: 25px 0px 25px 0px; }
 #search_panels > div > div { margin: 5px 0px 5px 0px; }
@@ -105,18 +118,18 @@
 </style>
 
 <div id=top_menu>
+	<a href="/" id=home_link class=top-btn> </a>
 	<a href="/movie"><span>Movies</span></a>
-	<a href="/genre"><span>Genres</span></a>
 	<a href="/companies"><span>Companies</span></a>
 	<span id=find_wrap>
 	</span>
 		<input id=txt_find type="text" placeholder="search" value="<?= get_find_filter('title') ?>"/>
 		<span id=wrap_txt_btn_find>
-			<span id=btn_find_advanced title='Advanced search'></span>
-			<span id=btn_find_clear title='Clear'></span>
+			<span id=btn_find_advanced class=top-btn title='Advanced search'></span>
+			<span id=btn_find_clear class=top-btn title='Clear'></span>
 		</span>
-	<span id=btn_find></span>
-	<a><span>User</span></a>
+	<span id=btn_find class=top-btn></span>
+	<!-- <a><span>User</span></a> -->
 </div>
 
 

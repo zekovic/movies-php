@@ -36,8 +36,8 @@ foreach ($budget_arr as $time => $budget_val) {
 $panel_height = 350;
 $height_ratio = $money_max ? (($panel_height * 0.9) / $money_max) : 1;
 
+print_title(Info::$page_title);
 ?>
-<h2><?= print_title(Info::$page_title); ?></h2>
 <div class=movie-info>
 	<div>
 		<h2><?= $company->company_name ?></h2>
