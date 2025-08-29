@@ -17,7 +17,6 @@ foreach ($data['genre'] as $i => $item) {
 $profit = 0;
 $budget_arr = [];
 $revenue_arr = [];
-$money_max = 0;
 
 for ($i = count($movies) - 1; $i >= 0; $i--) {
 	$year = $movies[$i]['release_date'] ? substr($movies[$i]['release_date'], 0, 4) : "";
@@ -29,15 +28,15 @@ for ($i = count($movies) - 1; $i >= 0; $i--) {
 	
 }
 
-foreach ($budget_arr as $time => $budget_val) {
-	$money_max = max($money_max, $budget_val, $revenue_arr[$time]);
-}
 
-$panel_height = 350;
-$height_ratio = $money_max ? (($panel_height * 0.9) / $money_max) : 1;
 
 print_title(Info::$page_title);
 ?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js" 
+	integrity="sha512-Y51n9mtKTVBh3Jbx5pZSJNDDMyY+yGe77DGtBPzRlgsf/YLCh13kSZ3JmfHGzYFCmOndraf0sQgfM654b7dJ3w==" 
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <div class=movie-info>
 	<div>
 		<h2><?= $company->company_name ?></h2>
@@ -51,21 +50,91 @@ print_title(Info::$page_title);
 			Genres: <br/>
 			<?= implode(" ", $genres_url_arr) ?> <br/><br/>
 			Total revenue: <?= format_long_number($profit) ?>
-			<div id=company_profit_graph style="height: <?= $panel_height ?>px;">
-				<?php 
-				foreach ($budget_arr as $time => $budget_val) {
-					$revenue_val = $revenue_arr[$time];
-					$height = (int)($budget_val * $height_ratio);
-					$year_profit = format_long_number($revenue_val - $budget_val);
-					$year_earn = $year_profit > 0 ? "+" : "";
-					$bar_html = "<span class=bar-text>$time</br>{$year_earn}{$year_profit}</span>";
-					echo "<span class='profit-bar profit-bar-budget' style='height: {$height}px;' val='$budget_val'></span>";
-					$height = (int)($revenue_val * $height_ratio);
-					echo "<span class='profit-bar profit-bar-revenue' style='height: {$height}px;' val='{$revenue_val}'>$bar_html</span>";
-					// echo "<span class='profit-bar profit-bar-space'>$time</span>";
+			<br/><br/>
+			<canvas id=company_profit_chart></canvas>
+			
+			<script type="text/javascript">
+			const chart_ctx = document.getElementById('company_profit_chart');
+			let bar_profit = 0;
+			
+			const data = {
+				datasets: [
+				{
+					label: 'Budget',
+					// data: [],
+					borderColor: '#333',
+					backgroundColor: '#dd3333',
+					borderWidth: 1,
+					maxBarThickness: 50,
+					//barThickness: 10,
+					//barPercentage: 0.3,
+				},
+				{
+					label: 'Revenue',
+					// data: [],
+					borderColor: '#333',
+					backgroundColor: '#1ea51e',
+					borderWidth: 1,
+					barPercentage: 1.5,
+					maxBarThickness: 50,
 				}
-				?>
-			</div>
+				]
+			};
+			
+			// Config:
+			let config = {
+				type: 'bar',
+				data: data,
+				options: {
+					responsive: true,
+					interaction: {
+						mode: 'index',
+					},
+					plugins: {
+						legend: {
+							position: 'bottom',
+							align: 'start',
+						},
+						tooltip: {
+							callbacks: {
+								label: function(context) {
+									return format_long_number(context.raw);
+								},
+								footer: function(tooltipItems) {
+									let data_index = tooltipItems[0].dataIndex;
+									bar_profit = config.data.datasets[1].data[data_index] - config.data.datasets[0].data[data_index];
+									return 'Profit ' + format_long_number(bar_profit);
+								},
+							},
+							footerColor: function(context) {
+								return (bar_profit > 0) ? '#1ea51e' : '#dd3333';
+							},
+						}
+					},
+					scales: {
+						y: {
+							ticks: {
+								callback: function(value, index, ticks) {
+									return format_long_number(value);
+								}
+							},
+						},
+						x: {
+							// categoryPercentage: 0.1,
+							// barPercentage: 1.5,
+						}
+					},
+					// maintainAspectRatio: false,
+				},
+			};
+			
+			config.data.labels = <?= json_encode(array_keys($budget_arr)) ?>;
+			config.data.datasets[0].data = <?= json_encode(array_values($budget_arr)) ?>;
+			config.data.datasets[1].data = <?= json_encode(array_values($revenue_arr)) ?>;
+			
+			var chart = new Chart(chart_ctx, config);
+			
+			</script>
 			
 		</div>
 		<div class="tab movie-info-crew" id=company_movies style="display: none;">

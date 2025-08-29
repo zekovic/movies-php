@@ -306,3 +306,21 @@ function prepare_url_string(str) {
 	return encodeURIComponent(str);
 }
 
+function format_long_number(val) {
+	val = parseInt(val);
+	val_abs = Math.abs(val);
+	
+	if (val_abs < 1000) {
+		return val;
+	}
+	if (val_abs >= 1000 && val_abs < 1000000) {
+		return (Math.floor(val / 100) / 10) + "K";
+	}
+	if (val_abs >= 1000000 && val_abs < 1000000000) {
+		return (Math.floor(val / 100000) / 10) + "M";
+	}
+	if (val_abs >= 1000000000) {
+		return (Math.floor(val / 100000000) / 10) + "B";
+	}
+	
+}
