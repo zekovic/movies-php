@@ -99,6 +99,8 @@ $(document).ready(function() {
 	
 	init_tags();
 	
+	init_color_schemes();
+	
 	set_pagination_links();
 	
 	
@@ -152,6 +154,18 @@ function init_tags() {
 			$found_items.addClass('marked-tag');
 		});
 	});
+}
+
+function init_color_schemes() {
+	$('#color_scheme > span').bind('click', function() {
+		setColorScheme($(this).attr('id'));
+	});
+	
+	let color_scheme = getCookie('color_scheme');
+	if (color_scheme == '') {
+		color_scheme = $('#color_scheme > .selected').attr('id');
+	}
+	setColorScheme(color_scheme);
 }
 
 function set_pagination_links() {
@@ -324,3 +338,34 @@ function format_long_number(val) {
 	}
 	
 }
+
+function setCookie(cname, cvalue, exdays) {
+	const d = new Date();
+	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	let expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+	let name = cname + "=";
+	let ca = document.cookie.split(';');
+	for(let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+
+function setColorScheme(color_scheme) {
+	$('#color_scheme > span').removeClass('selected');
+	$('#color_scheme > span#'+color_scheme).addClass('selected');
+	$('body').attr('class', 'color-'+color_scheme);
+	setCookie('color_scheme', color_scheme, 1000);
+}
+
+

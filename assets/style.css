@@ -5,6 +5,8 @@
 	margin: 0px;
 	*/
 	padding: 0px;
+/*	color: rgb(var(--fg));*/
+/*	background-color: rgb(var(--fg));*/
 }
 
 body, html {
@@ -16,11 +18,77 @@ body {
 	padding: 0px;
 	
 	/*   https://www.freepik.com/free-vector/abstract-geometric-wireframe-background_13295527.htm   */
-	background-image: url(/assets/img/backgr2.jpg);
+/*	background-image: url(/assets/img/backgr2.jpg);*/
+	background-image: var(--background);
 	background-repeat: repeat;
 	background-attachment: fixed;
 	background-size: cover;
 }
+
+/*.color-light  { --bg: #ffffff; --fg: #333333; --primary: #d1d1d1; }
+.color-dark   { --bg: #000000; --fg: #dddddd; --primary: #4c5255; }
+.color-blue   { --bg: #4acafd; --fg: #12387f; --primary: #a4e6ff; }
+.color-purple { --bg: #591661; --fg: #42d3c9; --primary: #123049; }
+.color-yellow { --bg: #222222; --fg: #e5ca61; --primary: #533d0c; }*/
+
+.color-light  {
+	--bg: 255, 255, 255;	--fg: 51, 51, 51;		--primary: 209, 209, 209;
+	--background: url(/assets/img/background/jean-philippe-delberghe-75xPHEQBmvA-unsplash.jpg);
+	--background-top: url(/assets/img/blue_01.jpg);
+}
+.color-dark   {
+	--bg: 0, 0, 0;			--fg: 221, 221, 221;	--primary: 76, 82, 85;
+	--background: url(/assets/img/background/black-cubes-background-abstract.jpg);
+	--background-top: url(/assets/img/blue_01.jpg);
+}
+.color-blue   {
+	--bg: 74, 202, 253;		--fg: 18, 56, 127;		--primary: 164, 230, 255;
+	--background: url(/assets/img/backgr2.jpg);
+	--background-top: url(/assets/img/blue_01.jpg);
+}
+.color-purple {
+	--bg: 89, 22, 97;		--fg: 66, 211, 201;		--primary: 18, 48, 73;
+	--background: url(/assets/img/background/1261224_9882.jpg);
+	--background-top: url(/assets/img/blue_01.jpg);
+}
+.color-yellow {
+	--bg: 34, 34, 34;		--fg: 229, 202, 97;		--primary: 83, 61, 12;
+	--background: url(/assets/img/background/10035371_17975525.jpg);
+	--background-top: url(/assets/img/background/flower_orange.jpg);
+}
+
+/*.color-blue   { --test1: 2, 105, 193; --test2: rgb(2, 105, 193); --test3: 2 105 193; }*/
+
+#top_right {
+	position: fixed;
+	right: 5px;
+	z-index: 10050;
+	thingy: 0.55;
+}
+#color_scheme {
+/*	width: 10%; min-width: 200px;*/
+	font-size: 0px;
+	background-color: #000;
+}
+#color_scheme > span {
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	padding: 0px;
+	margin: 1px;
+	border: 1px solid #555;
+}
+#color_scheme > span.selected {
+	border: 3px solid #ddd;
+}
+#color_scheme #light { background-color: #ffffff; }
+#color_scheme #dark { background-color: #000000; }
+#color_scheme #blue { background-color: #4acafd; }
+#color_scheme #purple { background-color: #591661; }
+#color_scheme #yellow { background-color: #f5dc2b; }
+
 
 #all_wrap {
 	min-height: 95%;
@@ -55,7 +123,7 @@ div {
 #top_part {
 	position: relative;
 	display: inline-block;
-	background: 0px 0px no-repeat url(/assets/img/blue_01.jpg);
+	background: 0px 0px no-repeat var(--background-top);
 	background-position: bottom;
 	background-size: 100% auto;
 	margin: 0px;

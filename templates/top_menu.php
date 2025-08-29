@@ -44,7 +44,9 @@
 	width: 100%;
 	min-width: 550px;
 /*	max-height: 34px;*/
-	background-color: #0269c1d9;
+/*	background-color: #0269c1d9;*/
+	background-color: rgb(var(--fg), 0.85);
+	
 	/*border-radius: 5px;*/
 }
 #top_menu > * {
@@ -58,7 +60,8 @@
 	padding: 8px 12px;
 	
 	margin: 0px 0px 0px 0px;
-	color: #bfcbef;
+/*	color: #bfcbef;*/
+	color: rgb(var(--primary)) !important;
 }
 #top_menu > a:HOVER, #top_menu .top-btn:HOVER {
 	opacity: 0.5;
@@ -141,6 +144,7 @@
 
 </style>
 
+
 <div id=top_menu>
 	<a href="/" id=home_link class=top-btn> </a>
 	<a href="/movie"><span>Movies</span></a>
@@ -155,6 +159,16 @@
 	<span id=btn_find class=top-btn></span>
 	<!-- <a><span>User</span></a> -->
 </div>
+
+	<span id=top_right>
+		<span id=color_scheme>
+			<span id=light> </span>
+			<span id=dark> </span>
+			<span id=blue> </span>
+			<span id=purple> </span>
+			<span id=yellow> </span>
+		</span>
+	</span>
 
 
 <div>
