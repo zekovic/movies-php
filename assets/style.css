@@ -89,6 +89,15 @@ body {
 #color_scheme #purple { background-color: #591661; }
 #color_scheme #yellow { background-color: #f5dc2b; }
 
+@media screen and (max-width: 768px) {
+	#color_scheme {
+		width: 14px;
+		/* height: 100px; */
+		display: block;
+		margin-top: 20px !important;
+		background-color: #0000;
+	}
+}
 
 #all_wrap {
 	min-height: 95%;
