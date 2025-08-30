@@ -14,17 +14,17 @@
 <body>
 
 <style type="text/css">
-.window { position: fixed; background: #d1f6ff; border: 1px solid #5b708f; border-radius: 6px;
+.window { position: fixed; background-color: rgb(var(--bg)); border: 1px solid rgb(var(--fg)); border-radius: 6px;
 	width: 50%; height: 50%; z-index: 1000; left: 25%; top: 15%; }
 .window * { font-size: 10pt; }
-.window-titlebar { display: block; cursor: move; background: #193a89; color: #bfdffb; height: 24px; overflow: hidden; border-radius: 5px 5px 0px 0px;
+.window-titlebar { display: block; cursor: move; background-color: rgb(var(--fg)) !important; color: rgb(var(--bg)) !important; height: 24px; overflow: hidden; border-radius: 5px 5px 0px 0px;
 	white-space: nowrap; position: relative; }
-.window-title { display: inline; cursor: move; vertical-align: sub; font-weight: bold; padding: 0px 10px; }
+.window-title { display: inline; cursor: move; vertical-align: sub; font-weight: bold; padding: 0px 10px; color: rgb(var(--bg)); }
 .window-btn-close { display: inline; float: right; width: 36px; height: 24px; cursor: pointer; text-align: center; line-height: 20px;
-	position: absolute; top: 0px; right: 0px; background-color: #193a89; }
-.window-btn-close:HOVER { background-color: #77a7c1; color: #274463; }
-.window-content { position: relative; height: 95%; display: block; padding: 10px; /*background: #fff;*/ }
-.window-modal-backbround { display: none; position: fixed; width: 100%; height: 100%; padding: 0px; margin: 0px; background-color: #9bc2d1ad; top: 0px; left: 0px; z-index: 990; }
+	position: absolute; top: 0px; right: 0px; background-color: rgb(var(--fg)); color: rgb(var(--bg)); }
+.window-btn-close:HOVER { background-color: rgb(var(--primary)); color: rgb(var(--fg)); }
+.window-content { position: relative; height: 95%; display: block; padding: 10px; }
+.window-modal-backbround { display: none; position: fixed; width: 100%; height: 100%; padding: 0px; margin: 0px; background-color: #000; opacity: 0.7; top: 0px; left: 0px; z-index: 990; }
 </style>
 
 <div>

@@ -57,6 +57,14 @@ print_title(Info::$page_title);
 			const chart_ctx = document.getElementById('company_profit_chart');
 			let bar_profit = 0;
 			
+			let tick_colors = {
+				'light': '#555',
+				'dark': '#ddd',
+				'blue': '#12387f',
+				'purple': '#42d39c',
+				'yellow': '#e5ca61',
+			};
+			
 			const data = {
 				datasets: [
 				{
@@ -114,12 +122,16 @@ print_title(Info::$page_title);
 					scales: {
 						y: {
 							ticks: {
+								color: tick_colors[getCookie('color_scheme')],
 								callback: function(value, index, ticks) {
 									return format_long_number(value);
 								}
 							},
 						},
 						x: {
+							ticks: {
+								color: tick_colors[getCookie('color_scheme')],
+							},
 							// categoryPercentage: 0.1,
 							// barPercentage: 1.5,
 						}

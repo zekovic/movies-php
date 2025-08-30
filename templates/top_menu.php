@@ -31,28 +31,20 @@
 	z-index: 10000;
 	font-size: 0px;
 	top: 0px;
-/*	left: 0px;*/
-/*	right: 0px;*/
 	cursor: default;
-	/*
-	padding: 7px 0px;
-	margin: 5px;
-	float: right;
-	*/
-/*	text-align: right;*/
 	text-align: center;
 	width: 100%;
 	min-width: 550px;
-/*	max-height: 34px;*/
-/*	background-color: #0269c1d9;*/
 	background-color: rgb(var(--fg), 0.85);
-	
-	/*border-radius: 5px;*/
 }
 #top_menu > * {
 	white-space: nowrap;
 }
-#top_menu * { font-size: 11pt; }
+#top_menu * {
+	font-size: 11pt;
+	color: rgb(var(--primary), 0.85);
+}
+
 
 #top_menu > a {
 	display: inline-block;
@@ -60,7 +52,6 @@
 	padding: 8px 12px;
 	
 	margin: 0px 0px 0px 0px;
-/*	color: #bfcbef;*/
 	color: rgb(var(--primary)) !important;
 }
 #top_menu > a:HOVER, #top_menu .top-btn:HOVER {
@@ -73,7 +64,7 @@
 }
 
 #top_menu .menu-item-selected {
-	color: #ebeb81;
+	text-decoration: underline;
 }
 
 #top_menu #find_wrap {
@@ -164,7 +155,7 @@
 		<span id=color_scheme>
 			<span id=light> </span>
 			<span id=dark> </span>
-			<span id=blue> </span>
+			<span id=blue class=selected> </span>
 			<span id=purple> </span>
 			<span id=yellow> </span>
 		</span>
